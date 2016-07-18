@@ -72,11 +72,17 @@
                             <outlet property="delegate" destination="z2E-Al-CGu" id="JPh-hz-HPJ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Rhd-O6-uXX"/>
+                    <navigationItem key="navigationItem" id="Rhd-O6-uXX">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="0JK-w3-29o">
+                            <connections>
+                                <action selector="createNewTimer:" destination="z2E-Al-CGu" id="Hva-G7-b7O"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qX-It-m3L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1064" y="555"/>
+            <point key="canvasLocation" x="819" y="555"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Dz6-Bv-1ia">
@@ -94,7 +100,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0rP-le-wXC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="400" y="555"/>
+            <point key="canvasLocation" x="172" y="555"/>
         </scene>
     </scenes>
 </document>

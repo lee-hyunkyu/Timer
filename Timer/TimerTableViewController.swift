@@ -21,6 +21,12 @@ class TimerTableViewController: UITableViewController {
         static let TimerCell = "Timer"                                          // Timer Cell Reuse Identifier
     }
     
+    // MARK: Storyboard
+    
+    @IBAction func createNewTimer(sender: UIBarButtonItem) {
+        
+        
+    }
     // MARK: View
 
     override func viewDidLoad() {
