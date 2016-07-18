@@ -38,8 +38,7 @@ class TimerTableViewController: UITableViewController {
                 Timer.createTimerWithInfo("\(timer) Timer", inProject: projects[project], inManagedObjectContext: context)
             }
         }
-        
-        
+        tableView.reloadData()        
     }
     // MARK: View
 
