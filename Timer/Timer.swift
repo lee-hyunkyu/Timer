@@ -29,8 +29,10 @@ class Timer: NSManagedObject {
         
     }
     
-    private struct Names {
+    struct Names {
         static let ProjectSet = "projects"
         static let Entity = "Timer"
+        static let ID = "id"
+        static let Sessions = "sessions"
     }
 }
