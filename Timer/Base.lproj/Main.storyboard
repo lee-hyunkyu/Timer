@@ -42,6 +42,9 @@
                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="265" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3KN-Zi-nVG">
                                             <rect key="frame" x="558" y="8" width="34" height="57.5"/>
                                             <state key="normal" title="Start"/>
+                                            <connections>
+                                                <action selector="changeTimerStatus:" destination="pB7-zC-ITB" eventType="touchUpInside" id="ABF-v3-M5F"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -57,6 +60,11 @@
                                         <constraint firstItem="IeL-vq-5lS" firstAttribute="top" secondItem="f6Y-p0-s4S" secondAttribute="topMargin" id="zdj-vB-mjj"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="actionButton" destination="3KN-Zi-nVG" id="dFD-ag-f2t"/>
+                                    <outlet property="nameOfTimerLabel" destination="Wuz-Zg-7kg" id="1Qa-hy-8gr"/>
+                                    <outlet property="timerLabel" destination="IeL-vq-5lS" id="5E5-2E-HCD"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

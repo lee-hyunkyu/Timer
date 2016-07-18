@@ -10,15 +10,12 @@ import UIKit
 
 class TimerTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet weak var actionButton: UIButton!                                  // will be used to either start or stop the timer
+    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var nameOfTimerLabel: UILabel!
+    
+    @IBAction func changeTimerStatus(sender: UIButton) {
     }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    
 
 }
