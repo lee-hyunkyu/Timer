@@ -57,15 +57,27 @@ class TimerTableViewController: UITableViewController {
         return projects[section].subTimers?.count ?? 0
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(Cells.TimerCell, forIndexPath: indexPath)
 
-        // Configure the cell...
+        if let timerCell = cell as? TimerTableViewCell {
+            let projectData = projects[indexPath.section]
+            let timerSet = projectData.subTimers?.allObjects as! [Timer]
+            let timer = timerSet[indexPath.row]
+            timerCell.nameOfTimerLabel.text = timer.name ?? "No Name"
+            timerCell.timerLabel.text = timer.id?.substringToIndex(timer.id!.startIndex.advancedBy(4))
+            if indexPath.row % 2 == 0 {
+                timerCell.actionButton.backgroundColor = UIColor.redColor()
+                timerCell.actionButton.setAttributedTitle(NSAttributedString(string: "Is Even"), forState: UIControlState.Normal)
+                timerCell.actionButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            }
+            
+        }
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
