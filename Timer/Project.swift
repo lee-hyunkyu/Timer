@@ -13,5 +13,9 @@ import CoreData
 class Project: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
+    
+    struct Names {
+        static let Entity = "Project"
+    }
 
 }

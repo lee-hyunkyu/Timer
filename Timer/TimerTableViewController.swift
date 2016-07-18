@@ -14,6 +14,7 @@ class TimerTableViewController: UITableViewController {
     // MARK: Model
     
     var context: NSManagedObjectContext = ((UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext)!
+    var projects = [Project]()
     
     // MARK: Constants
     
@@ -24,7 +25,6 @@ class TimerTableViewController: UITableViewController {
     // MARK: Storyboard
     
     @IBAction func createNewTimer(sender: UIBarButtonItem) {
-        
         
     }
     // MARK: View
@@ -41,12 +41,20 @@ class TimerTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        // Number of Projects
+        let request = NSFetchRequest(entityName: Project.Names.Entity)
+        return context.countForFetchRequest(request, error: nil)
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        if projects.isEmpty {
+            let request = NSFetchRequest(entityName: Project.Names.Entity)
+            if let projectResults = (try? context.executeFetchRequest(request)) as? [Project] {
+                projects = projectResults
+            }
+        }
+        return projects[section].subTimers?.count ?? 0
     }
 
     /*
