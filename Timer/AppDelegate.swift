@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let context = appDel.managedObjectContext
         let coord = appDel.persistentStoreCoordinator
 
-        var fetchRequest = NSFetchRequest(entityName: "Tweet")
+        var fetchRequest = NSFetchRequest(entityName: Project.Names.Entity)
         var deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
         do {
@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             debugPrint(error)
         }
 
-        fetchRequest = NSFetchRequest(entityName: "SearchTerm")
+        fetchRequest = NSFetchRequest(entityName: Timer.Names.Entity)
         deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         do {
@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             debugPrint(error)
         }
 
-        fetchRequest = NSFetchRequest(entityName: "Mention")
+        fetchRequest = NSFetchRequest(entityName: Session.Names.Entity)
         deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         do {
