@@ -175,6 +175,9 @@
                                                     <state key="normal" title="+">
                                                         <color key="titleColor" red="0.20235807107904175" green="0.83812581806282727" blue="0.4613998644903573" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="addProject" destination="zqr-Aj-pWh" eventType="touchUpInside" id="4Co-yF-NHN"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
