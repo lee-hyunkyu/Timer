@@ -65,6 +65,7 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
                 if let newProjectCell = cell as? AddNewProjectTableViewCell {
                     newProjectCell.textField.delegate = self
                     newProjectCell.context = context
+                    newProjectCell.AddProjectButton.enabled = false
                 }
             } else {
                 cell = tableView.dequeueReusableCellWithIdentifier(Cells.Project, forIndexPath: indexPath)
@@ -134,7 +135,7 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        timerName = textField.text
+        gitimerName = textField.text
         doneButton.enabled = true
         doneButton.tintColor = nil
         return true
