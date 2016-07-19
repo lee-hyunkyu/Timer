@@ -29,6 +29,7 @@ class Project: NSManagedObject {
     
     struct Names {
         static let Entity = "Project"
+        static let DefaultProject = "Inbox"
     }
     
     
