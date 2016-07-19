@@ -154,6 +154,43 @@
                                     <outlet property="textField" destination="W9F-uo-BTS" id="Zrv-s0-nje"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddNewProject" rowHeight="211" id="zqr-Aj-pWh" customClass="AddNewProjectTableViewCell" customModule="Timer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="335.5" width="600" height="211"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zqr-Aj-pWh" id="CMZ-t6-yOv">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="210.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gJT-8k-gNC">
+                                            <rect key="frame" x="8" y="8" width="584" height="49"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add New Project" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bsl-Nh-ts8">
+                                                    <rect key="frame" x="0.0" y="0.0" width="546" height="49"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="253" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="frI-68-nfz">
+                                                    <rect key="frame" x="554" y="0.0" width="30" height="49"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                                    <state key="normal" title="+">
+                                                        <color key="titleColor" red="0.20235807107904175" green="0.83812581806282727" blue="0.4613998644903573" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="leadingMargin" secondItem="gJT-8k-gNC" secondAttribute="leading" id="NGt-cS-kgJ"/>
+                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="gJT-8k-gNC" secondAttribute="bottom" id="Osj-Lp-iAn"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="gJT-8k-gNC" secondAttribute="trailing" id="Y7A-9S-s8X"/>
+                                        <constraint firstAttribute="topMargin" secondItem="gJT-8k-gNC" secondAttribute="top" id="npf-Md-szE"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="AddProjectButton" destination="frI-68-nfz" id="gCj-F8-LCc"/>
+                                    <outlet property="textField" destination="bsl-Nh-ts8" id="dvy-m3-EUo"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <sections/>
                         <connections>
@@ -181,7 +218,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jCD-FT-Lja" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="jMn-w7-bKM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1367" y="539"/>
+            <point key="canvasLocation" x="1204" y="320"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Dz6-Bv-1ia">
