@@ -12,6 +12,7 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
     
     var context: NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
     var projects: [Project]!
+    var selectedProject: Project?
     
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
@@ -72,6 +73,7 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
             let backgroundView = UIView(frame: (cell?.frame)!)
             backgroundView.backgroundColor = UIColor.greenColor().colorWithAlphaComponent(0.1)
             cell?.selectedBackgroundView = backgroundView
+            selectedProject = projects[indexPath.row]
         }
     }
     
@@ -120,6 +122,8 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        doneButton.enabled = true
+        doneButton.tintColor = nil
         return true
     }
     
