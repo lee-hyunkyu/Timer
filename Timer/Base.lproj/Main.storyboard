@@ -84,9 +84,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="0JK-w3-29o">
                             <connections>
                                 <action selector="createNewTimer:" destination="z2E-Al-CGu" id="Hva-G7-b7O"/>
-                                <segue destination="oO1-0m-pwj" kind="popoverPresentation" identifier="NewTimer" popoverAnchorBarButtonItem="0JK-w3-29o" id="LDF-f1-7SS">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
+                                <segue destination="naE-fj-3g4" kind="presentation" identifier="NewTimer" id="LDF-f1-7SS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -105,7 +103,7 @@
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Basic" textLabel="17h-PG-ozW" style="IBUITableViewCellStyleDefault" id="4to-SX-VPV">
-                                <rect key="frame" x="0.0" y="49.5" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4to-SX-VPV" id="Xb3-Sa-Pxk">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -128,10 +126,16 @@
                             <outlet property="delegate" destination="oO1-0m-pwj" id="ftL-sm-NkY"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="dyx-Ic-buh">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Dny-IC-8rP">
+                            <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="Cjm-ck-GAi"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jCD-FT-Lja" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="555" y="539"/>
+            <point key="canvasLocation" x="1367" y="539"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Dz6-Bv-1ia">
@@ -150,6 +154,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0rP-le-wXC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-452" y="-237"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="nhn-mC-hIs">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="naE-fj-3g4" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EgB-IR-Nnr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="oO1-0m-pwj" kind="relationship" relationship="rootViewController" id="ptS-6n-Mbb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WRf-QG-mns" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="555" y="539"/>
         </scene>
     </scenes>
 </document>

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TimerTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
+class TimerTableViewController: UITableViewController {
     
     // MARK: Model
     
@@ -129,21 +129,10 @@ class TimerTableViewController: UITableViewController, UIPopoverPresentationCont
         switch segue.identifier! {
         case Segues.NewTimer:
             if let newTimerVC = destination as? NewTimerTableViewController {
-                if let ppc = newTimerVC.popoverPresentationController {
-                    ppc.delegate = self
-                    newTimerVC.preferredContentSize = view.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
-                    
-                }
             }
             
         default: break
         }
-    }
-    
-    // MARK: - Popover Delegation
- 
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
     }
 
 }
