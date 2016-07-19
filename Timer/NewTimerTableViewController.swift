@@ -7,17 +7,19 @@
 //
 
 import UIKit
-
-class NewTimerTableViewController: UITableViewController {
+import CoreData
+class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
+    
+    var context: NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+    var projects: [Project]!
+    
+    struct Cells {
+        static let Timer = "Timer"
+        static let Project = "Project"
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,19 +31,30 @@ class NewTimerTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 5
+        if section == 0 {
+            return 1
+        }else {
+            return projects.count
+        }
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Basic", forIndexPath: indexPath)
-
-        cell.textLabel?.text = "\(indexPath.row)"
+        var cell: UITableViewCell
+        if indexPath.section == 0 {
+            cell = tableView.dequeueReusableCellWithIdentifier(Cells.Timer, forIndexPath: indexPath)
+            if let newTimerCell = cell as? NewTimerTableViewCell {
+                newTimerCell.textField.delegate = self
+            }
+        } else {
+            cell = tableView.dequeueReusableCellWithIdentifier(Cells.Project, forIndexPath: indexPath)
+            cell.textLabel?.text = projects[indexPath.row].name
+        }
 
         return cell
     }
@@ -81,6 +94,9 @@ class NewTimerTableViewController: UITableViewController {
         return true
     }
     */
+    
+    // MARK: - Text Field Delegate
+    
 
     /*
     // MARK: - Navigation

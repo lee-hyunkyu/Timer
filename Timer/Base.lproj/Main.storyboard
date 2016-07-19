@@ -102,7 +102,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Basic" textLabel="17h-PG-ozW" style="IBUITableViewCellStyleDefault" id="4to-SX-VPV">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Project" textLabel="17h-PG-ozW" style="IBUITableViewCellStyleDefault" id="4to-SX-VPV">
                                 <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4to-SX-VPV" id="Xb3-Sa-Pxk">
@@ -118,6 +118,41 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Timer" rowHeight="178" id="lxT-SW-Z81" customClass="NewTimerTableViewCell" customModule="Timer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="157.5" width="600" height="178"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lxT-SW-Z81" id="sSu-UE-nQN">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="177.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7bs-fc-1ND">
+                                            <rect key="frame" x="8" y="8" width="584" height="30"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Task Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Jc-rq-Rav">
+                                                    <rect key="frame" x="0.0" y="0.0" width="85" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W9F-uo-BTS">
+                                                    <rect key="frame" x="93" y="0.0" width="491" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="7bs-fc-1ND" secondAttribute="trailing" id="1XF-lp-Nes"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="7bs-fc-1ND" secondAttribute="leading" id="Ofr-be-sz8"/>
+                                        <constraint firstItem="7bs-fc-1ND" firstAttribute="top" secondItem="sSu-UE-nQN" secondAttribute="topMargin" id="PlK-mG-0h1"/>
+                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="7bs-fc-1ND" secondAttribute="bottom" id="hRK-Su-iQg"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="textField" destination="W9F-uo-BTS" id="Zrv-s0-nje"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>

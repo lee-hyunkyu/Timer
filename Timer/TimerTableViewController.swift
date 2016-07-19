@@ -125,11 +125,15 @@ class TimerTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destination = segue.destinationViewController
+        var destination = segue.destinationViewController
+        if let navCon = destination as? UINavigationController {
+            destination = navCon.visibleViewController!
+        }
         switch segue.identifier! {
         case Segues.NewTimer:
             if let newTimerVC = destination as? NewTimerTableViewController {
-                
+                newTimerVC.context = context
+                newTimerVC.projects = projects
             }
             
         default: break
@@ -141,7 +145,7 @@ class TimerTableViewController: UITableViewController {
     }
     
     @IBAction func addNewTimer(segue: UIStoryboardSegue) {
-        if let newTimerVC = segue.sourceViewController as? NewTimerTableViewController {
+        if let _ = segue.sourceViewController as? NewTimerTableViewController {
             
         }
         
