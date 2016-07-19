@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TimerTableViewController: UITableViewController {
+class TimerTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
     
     // MARK: Model
     
@@ -20,6 +20,10 @@ class TimerTableViewController: UITableViewController {
     
     private struct Cells {
         static let TimerCell = "Timer"                                          // Timer Cell Reuse Identifier
+    }
+    
+    private struct Segues {
+        static let NewTimer = "NewTimer"
     }
     
     // MARK: Storyboard
@@ -116,14 +120,48 @@ class TimerTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let destination = segue.destinationViewController
+        switch segue.identifier! {
+        case Segues.NewTimer:
+            if let newTimerVC = destination as? NewTimerTableViewController {
+                if let ppc = newTimerVC.popoverPresentationController {
+                    ppc.delegate = self
+                    newTimerVC.preferredContentSize = view.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+                    
+                }
+            }
+            
+        default: break
+        }
     }
-    */
+    
+    // MARK: - Popover Delegation
+ 
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

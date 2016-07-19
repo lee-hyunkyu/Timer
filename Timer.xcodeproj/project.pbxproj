@@ -20,6 +20,7 @@
 		471EB64C1D3D875400A8B8C7 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471EB6461D3D875400A8B8C7 /* Project.swift */; };
 		471EB64D1D3D875400A8B8C7 /* Session+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471EB6471D3D875400A8B8C7 /* Session+CoreDataProperties.swift */; };
 		471EB64E1D3D875400A8B8C7 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471EB6481D3D875400A8B8C7 /* Session.swift */; };
+		472A1C981D3DC6BC00B3EED2 /* NewTimerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472A1C971D3DC6BC00B3EED2 /* NewTimerTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		471EB6461D3D875400A8B8C7 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		471EB6471D3D875400A8B8C7 /* Session+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		471EB6481D3D875400A8B8C7 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		472A1C971D3DC6BC00B3EED2 /* NewTimerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTimerTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 				471EB6401D3D83DD00A8B8C7 /* TimerTableViewController.swift */,
 				471EB6291D3D7A6F00A8B8C7 /* AppDelegate.swift */,
 				471EB62D1D3D7A6F00A8B8C7 /* Main.storyboard */,
+				472A1C991D3DC6C200B3EED2 /* NewTimer */,
 				471EB6331D3D7A6F00A8B8C7 /* Assets.xcassets */,
 				471EB6351D3D7A6F00A8B8C7 /* LaunchScreen.storyboard */,
 				471EB6381D3D7A6F00A8B8C7 /* Info.plist */,
@@ -94,6 +97,14 @@
 				471EB6481D3D875400A8B8C7 /* Session.swift */,
 			);
 			name = "Data Model";
+			sourceTree = "<group>";
+		};
+		472A1C991D3DC6C200B3EED2 /* NewTimer */ = {
+			isa = PBXGroup;
+			children = (
+				472A1C971D3DC6BC00B3EED2 /* NewTimerTableViewController.swift */,
+			);
+			name = NewTimer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +183,7 @@
 				471EB64D1D3D875400A8B8C7 /* Session+CoreDataProperties.swift in Sources */,
 				471EB6321D3D7A6F00A8B8C7 /* Timer.xcdatamodeld in Sources */,
 				471EB6411D3D83DD00A8B8C7 /* TimerTableViewController.swift in Sources */,
+				472A1C981D3DC6BC00B3EED2 /* NewTimerTableViewController.swift in Sources */,
 				471EB62A1D3D7A6F00A8B8C7 /* AppDelegate.swift in Sources */,
 				471EB64B1D3D875400A8B8C7 /* Project+CoreDataProperties.swift in Sources */,
 				471EB64A1D3D875400A8B8C7 /* Timer.swift in Sources */,
@@ -329,6 +341,7 @@
 				471EB63D1D3D7A6F00A8B8C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
