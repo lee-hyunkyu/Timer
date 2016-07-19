@@ -13,40 +13,6 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
-    func deleteCoreData() {
-        let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
-        let context = appDel.managedObjectContext
-        let coord = appDel.persistentStoreCoordinator
-        
-        var fetchRequest = NSFetchRequest(entityName: Project.Names.Entity)
-        var deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        
-        do {
-            try coord.executeRequest(deleteRequest, withContext: context)
-        } catch let error as NSError {
-            debugPrint(error)
-        }
-        
-        fetchRequest = NSFetchRequest(entityName: Timer.Names.Entity)
-        deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        
-        do {
-            try coord.executeRequest(deleteRequest, withContext: context)
-        } catch let error as NSError {
-            debugPrint(error)
-        }
-        
-        fetchRequest = NSFetchRequest(entityName: Session.Names.Entity)
-        deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        
-        do {
-            try coord.executeRequest(deleteRequest, withContext: context)
-        } catch let error as NSError {
-            debugPrint(error)
-        }
-    }
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -122,6 +88,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // MARK: - Core Data stack
+    
+    func deleteCoreData() {
+        let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context = appDel.managedObjectContext
+        let coord = appDel.persistentStoreCoordinator
+        
+        var fetchRequest = NSFetchRequest(entityName: Project.Names.Entity)
+        var deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try coord.executeRequest(deleteRequest, withContext: context)
+        } catch let error as NSError {
+            debugPrint(error)
+        }
+        
+        fetchRequest = NSFetchRequest(entityName: Timer.Names.Entity)
+        deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try coord.executeRequest(deleteRequest, withContext: context)
+        } catch let error as NSError {
+            debugPrint(error)
+        }
+        
+        fetchRequest = NSFetchRequest(entityName: Session.Names.Entity)
+        deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try coord.executeRequest(deleteRequest, withContext: context)
+        } catch let error as NSError {
+            debugPrint(error)
+        }
+    }
 
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "just.for.fun.Timer" in the application's documents Application Support directory.
