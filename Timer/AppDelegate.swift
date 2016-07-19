@@ -17,11 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-//        let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
-//        let context = appDel.managedObjectContext
-//        let coord = appDel.persistentStoreCoordinator
-//        
-//        var fetchRequest = NSFetchRequest(entityName: Project.Names.Entity)
+        let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context = appDel.managedObjectContext
+        let coord = appDel.persistentStoreCoordinator
+        
+        var fetchRequest = NSFetchRequest(entityName: Project.Names.Entity)
 //        var deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 //        
 //        do {
@@ -47,18 +47,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        } catch let error as NSError {
 //            debugPrint(error)
 //        }
-//        
-//        fetchRequest = NSFetchRequest(entityName: Project.Names.Entity)
-//        if context.countForFetchRequest(fetchRequest, error: nil) == 0 {
-//            context.performBlockAndWait {
-//                Project.createProjectWithName(Project.Names.DefaultProject, inManagedObjectContext: context)
-//            }
-//        }
-//        do {
-//            try context.save()
-//        } catch let error {
-//            print("\(error)")
-//        }
+        
+        if context.countForFetchRequest(fetchRequest, error: nil) == 0 {
+            context.performBlockAndWait {
+                if let project = Project.createProjectWithName(Project.Names.DefaultProject, inManagedObjectContext: context) {
+                    Project.defaultID = project.id
+                }
+            }
+        }
+        do {
+            try context.save()
+        } catch let error {
+            print("\(error)")
+        }
     
         return true
     }

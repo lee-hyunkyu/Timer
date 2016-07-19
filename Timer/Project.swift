@@ -30,7 +30,10 @@ class Project: NSManagedObject {
     struct Names {
         static let Entity = "Project"
         static let DefaultProject = "Inbox"
+        static let ID = "id"
     }
+    
+    static var defaultID: String?
     
     
 
