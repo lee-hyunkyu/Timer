@@ -20,6 +20,7 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
     struct Cells {
         static let Timer = "Timer"
         static let Project = "Project"
+        static let NewProject = "AddNewProject"
     }
 
     override func viewDidLoad() {
@@ -45,7 +46,7 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
         if section == 0 {
             return 1
         }else {
-            return projects.count
+            return projects.count + 1
         }
     }
 
@@ -58,8 +59,18 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
                 newTimerCell.textField.delegate = self
             }
         } else {
-            cell = tableView.dequeueReusableCellWithIdentifier(Cells.Project, forIndexPath: indexPath)
-            cell.textLabel?.text = projects[indexPath.row].name
+            if indexPath.row == (tableView.numberOfRowsInSection(indexPath.section) - 1) {
+                // This is the last row so this is were you add a new project
+                cell = tableView.dequeueReusableCellWithIdentifier(Cells.NewProject, forIndexPath: indexPath)
+                if let newProjectCell = cell as? AddNewProjectTableViewCell {
+                    newProjectCell.textField.delegate = self
+                    newProjectCell.context = context
+                }
+            } else {
+                cell = tableView.dequeueReusableCellWithIdentifier(Cells.Project, forIndexPath: indexPath)
+                cell.textLabel?.text = projects[indexPath.row].name
+            }
+            
         }
 
         return cell
