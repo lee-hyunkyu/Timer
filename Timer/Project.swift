@@ -21,6 +21,7 @@ class Project: NSManagedObject {
             newProject.name = name
             newProject.id = NSUUID().UUIDString
             newProject.subTimers = nil
+            newProject.saveOrderOfTimers()
             return newProject
         }
         
@@ -51,7 +52,25 @@ class Project: NSManagedObject {
     
     // class func 
     // For every project, retrieve the order of timers
+    class func setOrderOfTimers(context: NSManagedObjectContext) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let request = NSFetchRequest(entityName: Names.Entity)
+        if let projects = (try? context.executeFetchRequest(request)) as? [Project] {
+            for project in projects {
+                project.orderOfTimers = defaults.objectForKey(Names.orderOfTimers + project.id!) as! [String]
+            }
+        }
+    }
     // For every project, save the order of timer
+    class func saveOrderOfTimers(context: NSManagedObjectContext) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let request = NSFetchRequest(entityName: Names.Entity)
+        if let projects = (try? context.executeFetchRequest(request)) as? [Project] {
+            for project in projects {
+                defaults.setObject(project.orderOfTimers, forKey: Names.orderOfTimers + project.id!)
+            }
+        }
+    }
     
     struct Names {
         static let Entity = "Project"

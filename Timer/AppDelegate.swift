@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let context = appDel.managedObjectContext
         let fetchRequest = NSFetchRequest(entityName: Project.Names.Entity)
         
-        // deleteCoreData()
+        //deleteCoreData()
         
         let fileManager = NSFileManager()
         // Set the Project.defaultID if not set already
@@ -44,6 +44,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Sets the default ID
             Project.setDefaultIDFromFileSystem(fileManager)
         }
+        context.performBlockAndWait {
+            Project.setOrderOfTimers(context)
+            Project.saveOrderOfTimers(context)
+        }
+        
         return true
     }
 
@@ -83,6 +88,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var fetchRequest = NSFetchRequest(entityName: Project.Names.Entity)
         var deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        context.performBlockAndWait {
+            if let projects = (try? context.executeFetchRequest(fetchRequest)) as? [Project] {
+                for project in projects {
+                    defaults.removeObjectForKey(Project.Names.orderOfTimers + project.id!)
+                }
+            }
+        }
         
         do {
             try coord.executeRequest(deleteRequest, withContext: context)
@@ -107,6 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch let error as NSError {
             debugPrint(error)
         }
+        
     }
 
     lazy var applicationDocumentsDirectory: NSURL = {
