@@ -27,6 +27,28 @@ class Project: NSManagedObject {
         return nil
     }
     
+    class func saveDefaultIDIntoFileSystem(fileManager: NSFileManager) {
+        if let projectID = Project.defaultID {
+            let fileManager = NSFileManager()
+            if let documentsDirectory = fileManager.URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).first {
+                if !fileManager.fileExistsAtPath(documentsDirectory.absoluteString + Project.Names.defaultFile) {
+                    let defaultIDData = projectID.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+                    fileManager.createFileAtPath(documentsDirectory.path! + Project.Names.defaultFile, contents: defaultIDData, attributes: nil)
+                }
+            }
+        }
+    }
+    
+    class func setDefaultIDFromFileSystem(fileManager: NSFileManager) {
+        if let documentsDirectory = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first {
+            do {
+                try Project.defaultID = NSString(contentsOfFile: documentsDirectory.path! + Project.Names.defaultFile, encoding: NSUTF8StringEncoding) as String
+            } catch {
+                print("File not read")
+            }
+        }
+    }
+    
     struct Names {
         static let Entity = "Project"
         static let DefaultProject = "Inbox"

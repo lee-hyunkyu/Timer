@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // deleteCoreData()
         
+        let fileManager = NSFileManager()
         // Set the Project.defaultID if not set already
         if context.countForFetchRequest(fetchRequest, error: nil) == 0 {
             context.performBlockAndWait {
@@ -31,15 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
             // Save the Project ID
-            if let projectID = Project.defaultID {
-                let fileManager = NSFileManager()
-                if let documentsDirectory = fileManager.URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).first {
-                    if !fileManager.fileExistsAtPath(documentsDirectory.absoluteString + Project.Names.defaultFile) {
-                        let defaultIDData = projectID.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-                        let fileCreated = fileManager.createFileAtPath(documentsDirectory.path! + Project.Names.defaultFile, contents: defaultIDData, attributes: nil)
-                    }
-                }
-            }
+            Project.saveDefaultIDIntoFileSystem(fileManager)
             
             do {
                 try context.save()
@@ -48,14 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
         } else {
-            let fileManager = NSFileManager()
-            if let documentsDirectory = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first {
-                do {
-                    try Project.defaultID = NSString(contentsOfFile: documentsDirectory.path! + Project.Names.defaultFile, encoding: NSUTF8StringEncoding) as String
-                } catch {
-                    print("File not read")
-                }
-            }
+            // Sets the default ID
+            Project.setDefaultIDFromFileSystem(fileManager)
         }
         return true
     }
