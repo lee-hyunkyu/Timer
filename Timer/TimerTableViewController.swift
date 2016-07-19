@@ -13,7 +13,7 @@ class TimerTableViewController: UITableViewController {
     
     // MARK: Model
     
-    var context: NSManagedObjectContext = ((UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext)!
+    var context: NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
     var projects = [Project]()
     
     // MARK: Constants
@@ -43,14 +43,14 @@ class TimerTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of sections
         // Number of Projects
         let request = NSFetchRequest(entityName: Project.Names.Entity)
-        return context.countForFetchRequest(request, error: nil)
+        return context?.countForFetchRequest(request, error: nil) ?? 0
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if projects.isEmpty {
             let request = NSFetchRequest(entityName: Project.Names.Entity)
-            if let projectResults = (try? context.executeFetchRequest(request)) as? [Project] {
+            if let projectResults = (try? context?.executeFetchRequest(request)) as? [Project] {
                 projects = projectResults
             }
         }
