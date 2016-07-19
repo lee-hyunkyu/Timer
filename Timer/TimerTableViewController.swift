@@ -28,15 +28,20 @@ class TimerTableViewController: UITableViewController {
         /*
          Create a series of random timers
          */
-        for project in 0..<5 {
-            Project.createProjectWithName("\(project) Project", inManagedObjectContext: context)
-        }
-        
-        
-        for project in 0..<5 {
-            for timer in 0..<6 {
-                Timer.createTimerWithInfo("\(timer) Timer", inProject: projects[project], inManagedObjectContext: context)
+        context.performBlockAndWait { [unowned self] in 
+            for project in 0..<5 {
+                Project.createProjectWithName("\(project) Project", inManagedObjectContext: self.context)
             }
+            for project in 0..<5 {
+                for timer in 0..<6 {
+                    Timer.createTimerWithInfo("\(timer) Timer", inProject: self.projects[project], inManagedObjectContext: self.context)
+                }
+            }
+        }
+        do {
+            try self.context.save()
+        } catch let error {
+            print("Error: \(error)")
         }
         tableView.reloadData()        
     }
