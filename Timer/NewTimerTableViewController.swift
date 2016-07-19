@@ -13,6 +13,8 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
     var context: NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
     var projects: [Project]!
     
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    
     struct Cells {
         static let Timer = "Timer"
         static let Project = "Project"
@@ -20,6 +22,8 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        doneButton.enabled = false
+        doneButton.tintColor = UIColor.grayColor().colorWithAlphaComponent(0.4)
     }
 
     override func didReceiveMemoryWarning() {
@@ -110,7 +114,7 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
     // MARK: - Text Field Delegate
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        textField.becomeFirstResponder()
+        //textField.becomeFirstResponder()
         return true
     }
     
