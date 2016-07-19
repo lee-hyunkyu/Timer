@@ -60,6 +60,10 @@ class Project: NSManagedObject {
     // ~/Documents/DefaultID.txt
     static var defaultID: String?
     
+    func orderOfTimersRelativeFilePath() -> String {
+        return "/" + self.id! + ".txt"
+    }
+    
     
     
 
