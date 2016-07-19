@@ -58,6 +58,7 @@ class Project: NSManagedObject {
         static let DefaultProject = "Inbox"
         static let ID = "id"
         static let defaultFile = "/DefaultID.txt"
+        static let orderOfTimers = "Order of Timers" // Add the id of the project after
     }
     
     // Saved in the Documents Directory
@@ -65,7 +66,8 @@ class Project: NSManagedObject {
     static var defaultID: String?
     
     func saveOrderOfTimers() {
-        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(orderOfTimers, forKey: Names.orderOfTimers + self.id!)
     }
     
     
