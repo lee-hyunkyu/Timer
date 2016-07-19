@@ -49,6 +49,10 @@ class Project: NSManagedObject {
         }
     }
     
+    // class func 
+    // For every project, retrieve the order of timers
+    // For every project, save the order of timer
+    
     struct Names {
         static let Entity = "Project"
         static let DefaultProject = "Inbox"
@@ -60,8 +64,8 @@ class Project: NSManagedObject {
     // ~/Documents/DefaultID.txt
     static var defaultID: String?
     
-    func orderOfTimersRelativeFilePath() -> String {
-        return "/" + self.id! + ".txt"
+    func saveOrderOfTimers() {
+        
     }
     
     

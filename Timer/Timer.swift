@@ -24,6 +24,9 @@ class Timer: NSManagedObject {
             let mutableProjectSet = newTimer.mutableSetValueForKey(Names.ProjectSet)   // TODO: get rid of this fucking string
             mutableProjectSet.addObject(superProject)
             superProject.orderOfTimers.append(newTimer.id!)
+            
+            superProject.saveOrderOfTimers()
+            
             return newTimer
         }
         return nil
