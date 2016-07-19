@@ -59,6 +59,18 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        if let _ = cell as? NewTimerTableViewCell {
+            // do nothing
+        } else {
+            // if it is a project
+            let backgroundView = UIView(frame: (cell?.frame)!)
+            backgroundView.backgroundColor = UIColor.greenColor().colorWithAlphaComponent(0.1)
+            cell?.selectedBackgroundView = backgroundView
+        }
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -96,6 +108,16 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
     */
     
     // MARK: - Text Field Delegate
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        textField.becomeFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
 
     /*

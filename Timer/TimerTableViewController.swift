@@ -29,7 +29,6 @@ class TimerTableViewController: UITableViewController {
     // MARK: Storyboard
     
     @IBAction func createNewTimer(sender: UIBarButtonItem) {
-        
                 
     }
     // MARK: View
@@ -125,6 +124,25 @@ class TimerTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print("This first/")
+        context?.performBlockAndWait { [unowned self] in
+            for project in 0..<5 {
+                if let newProject = Project.createProjectWithName("\(project) Project", inManagedObjectContext: self.context!) {
+                    self.projects.append(newProject)
+                }
+            }
+            
+            for project in 0..<5 {
+                for timer in 0..<6 {
+                    Timer.createTimerWithInfo("\(timer) Timer", inProject: self.projects[project], inManagedObjectContext: self.context!)
+                }
+            }
+        }
+        do {
+            try self.context?.save()
+        } catch let error {
+            print("Error: \(error)")
+        }
         var destination = segue.destinationViewController
         if let navCon = destination as? UINavigationController {
             destination = navCon.visibleViewController!
