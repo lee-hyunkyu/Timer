@@ -25,28 +25,8 @@ class TimerTableViewController: UITableViewController {
     // MARK: Storyboard
     
     @IBAction func createNewTimer(sender: UIBarButtonItem) {
-        /*
-         Create a series of random timers
-         */
-        context?.performBlockAndWait { [unowned self] in
-            for project in 0..<5 {
-                if let newProject = Project.createProjectWithName("\(project) Project", inManagedObjectContext: self.context!) {
-                    self.projects.append(newProject)
-                }
-            }
-            
-            for project in 0..<5 {
-                for timer in 0..<6 {
-                    Timer.createTimerWithInfo("\(timer) Timer", inProject: self.projects[project], inManagedObjectContext: self.context!)
-                }
-            }
-        }
-        do {
-            try self.context?.save()
-        } catch let error {
-            print("Error: \(error)")
-        }
-        tableView.reloadData()        
+        
+                
     }
     // MARK: View
 
@@ -85,18 +65,15 @@ class TimerTableViewController: UITableViewController {
         if let timerCell = cell as? TimerTableViewCell {
             let projectData = projects[indexPath.section]
             let timerSet = projectData.subTimers?.allObjects as! [Timer]
-            let timer = timerSet[indexPath.row]
-            timerCell.nameOfTimerLabel.text = timer.name ?? "No Name"
-            timerCell.timerLabel.text = timer.id?.substringToIndex(timer.id!.startIndex.advancedBy(4))
-            if indexPath.row % 2 == 0 {
-                timerCell.actionButton.backgroundColor = UIColor.redColor()
-                timerCell.actionButton.setAttributedTitle(NSAttributedString(string: "Is Even"), forState: UIControlState.Normal)
-                timerCell.actionButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            } else {
-                timerCell.actionButton.backgroundColor = UIColor.clearColor()
-                timerCell.actionButton.setAttributedTitle(NSAttributedString(string: "Not Even"), forState: UIControlState.Normal)
-                timerCell.actionButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            let timerID = projectData.orderOfTimers[indexPath.row]
+            var timer: Timer?
+            for possibleTimer in timerSet {
+                if possibleTimer.id == timerID {
+                    timer = possibleTimer
+                }
             }
+            timerCell.nameOfTimerLabel?.text = timer?.name
+            timerCell.timerLabel?.text = timer?.id?.substringToIndex((timer?.id?.startIndex.advancedBy(4))!)
             
         }
 

@@ -14,6 +14,8 @@ class Project: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
     
+    var orderOfTimers = [String]()
+    
     class func createProjectWithName(name: String, inManagedObjectContext context: NSManagedObjectContext) -> Project? {
         if let newProject = NSEntityDescription.insertNewObjectForEntityForName(Names.Entity, inManagedObjectContext: context) as? Project {
             newProject.name = name
