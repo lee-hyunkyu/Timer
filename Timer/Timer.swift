@@ -23,7 +23,8 @@ class Timer: NSManagedObject {
             guard let superProject = project else { return newTimer }           // only continue if there is a project passed in
             let mutableProjectSet = newTimer.mutableSetValueForKey(Names.ProjectSet)   // TODO: get rid of this fucking string
             mutableProjectSet.addObject(superProject)
-            superProject.orderOfTimers.append(newTimer.id!)
+            superProject.orderOfTimers.append(newTimer.id!)           
+            
             return newTimer
         }
         return nil

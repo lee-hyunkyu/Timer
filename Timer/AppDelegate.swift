@@ -31,14 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
             // Save the Project ID
-            if let projectID = Project.defaultID {
-                let fileManager = NSFileManager()
-                if let documentsDirectory = fileManager.URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).first {
-                    if !fileManager.fileExistsAtPath(documentsDirectory.absoluteString + Project.Names.defaultFile) {
-                        let defaultIDData = projectID.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-                    }
-                }
-            }
+            Project.saveDefaultID()
             
             do {
                 try context.save()
