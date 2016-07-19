@@ -129,11 +129,19 @@
                     <navigationItem key="navigationItem" id="dyx-Ic-buh">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Dny-IC-8rP">
                             <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="jMn-w7-bKM" kind="unwind" unwindAction="addNewTimer:" id="YML-Ru-LQ1"/>
+                            </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="Cjm-ck-GAi"/>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="Cjm-ck-GAi">
+                            <connections>
+                                <segue destination="jMn-w7-bKM" kind="unwind" unwindAction="addNewTimer:" id="gA4-4H-CwS"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jCD-FT-Lja" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="jMn-w7-bKM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1367" y="539"/>
         </scene>

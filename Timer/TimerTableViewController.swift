@@ -129,10 +129,22 @@ class TimerTableViewController: UITableViewController {
         switch segue.identifier! {
         case Segues.NewTimer:
             if let newTimerVC = destination as? NewTimerTableViewController {
+                
             }
             
         default: break
         }
+    }
+    
+    @IBAction func cancelNewTimer(segue: UIStoryboardSegue) {
+        
+    }
+    
+    @IBAction func addNewTimer(segue: UIStoryboardSegue) {
+        if let newTimerVC = segue.sourceViewController as? NewTimerTableViewController {
+            
+        }
+        
     }
 
 }
