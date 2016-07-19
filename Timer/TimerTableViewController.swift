@@ -31,7 +31,7 @@ class TimerTableViewController: UITableViewController {
         context?.performBlockAndWait { [unowned self] in
             for project in 0..<5 {
                 if let newProject = Project.createProjectWithName("\(project) Project", inManagedObjectContext: self.context!) {
-                    projects.append(newProject)
+                    self.projects.append(newProject)
                 }
             }
             
@@ -92,6 +92,10 @@ class TimerTableViewController: UITableViewController {
                 timerCell.actionButton.backgroundColor = UIColor.redColor()
                 timerCell.actionButton.setAttributedTitle(NSAttributedString(string: "Is Even"), forState: UIControlState.Normal)
                 timerCell.actionButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            } else {
+                timerCell.actionButton.backgroundColor = UIColor.clearColor()
+                timerCell.actionButton.setAttributedTitle(NSAttributedString(string: "Not Even"), forState: UIControlState.Normal)
+                timerCell.actionButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
             }
             
         }
