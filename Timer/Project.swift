@@ -31,9 +31,13 @@ class Project: NSManagedObject {
         static let Entity = "Project"
         static let DefaultProject = "Inbox"
         static let ID = "id"
+        static let defaultFile = "/DefaultID.txt"
     }
     
+    // Saved in the Documents Directory
+    // ~/Documents/DefaultID.txt
     static var defaultID: String?
+    
     
     
 

@@ -158,7 +158,7 @@ class TimerTableViewController: UITableViewController {
                 }
             }else {
                 let request = NSFetchRequest(entityName: Project.Names.Entity)
-                request.predicate = NSPredicate(format: "\(Project.Names.ID) = %@" , Project.defaultID!)
+                request.predicate = NSPredicate(format: "\(Project.Names.ID) = %@", Project.defaultID!)
                 context?.performBlockAndWait { [unowned self] in
                     if let defaultProject = (try? self.context!.executeFetchRequest(request))?.first as? Project {
                         Timer.createTimerWithInfo(timerName!, inProject: defaultProject, inManagedObjectContext: self.context!)

@@ -13,54 +13,84 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    func deleteCoreData() {
+        let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context = appDel.managedObjectContext
+        let coord = appDel.persistentStoreCoordinator
+        
+        var fetchRequest = NSFetchRequest(entityName: Project.Names.Entity)
+        var deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try coord.executeRequest(deleteRequest, withContext: context)
+        } catch let error as NSError {
+            debugPrint(error)
+        }
+        
+        fetchRequest = NSFetchRequest(entityName: Timer.Names.Entity)
+        deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try coord.executeRequest(deleteRequest, withContext: context)
+        } catch let error as NSError {
+            debugPrint(error)
+        }
+        
+        fetchRequest = NSFetchRequest(entityName: Session.Names.Entity)
+        deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try coord.executeRequest(deleteRequest, withContext: context)
+        } catch let error as NSError {
+            debugPrint(error)
+        }
+    }
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
         let context = appDel.managedObjectContext
-        let coord = appDel.persistentStoreCoordinator
+        let fetchRequest = NSFetchRequest(entityName: Project.Names.Entity)
         
-        var fetchRequest = NSFetchRequest(entityName: Project.Names.Entity)
-//        var deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-//        
-//        do {
-//            try coord.executeRequest(deleteRequest, withContext: context)
-//        } catch let error as NSError {
-//            debugPrint(error)
-//        }
-//        
-//        fetchRequest = NSFetchRequest(entityName: Timer.Names.Entity)
-//        deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-//        
-//        do {
-//            try coord.executeRequest(deleteRequest, withContext: context)
-//        } catch let error as NSError {
-//            debugPrint(error)
-//        }
-//        
-//        fetchRequest = NSFetchRequest(entityName: Session.Names.Entity)
-//        deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-//        
-//        do {
-//            try coord.executeRequest(deleteRequest, withContext: context)
-//        } catch let error as NSError {
-//            debugPrint(error)
-//        }
+        // deleteCoreData()
         
+        // Set the Project.defaultID if not set already
         if context.countForFetchRequest(fetchRequest, error: nil) == 0 {
             context.performBlockAndWait {
                 if let project = Project.createProjectWithName(Project.Names.DefaultProject, inManagedObjectContext: context) {
                     Project.defaultID = project.id
+                    print("Default ID Set ", terminator: Project.defaultID! + "\n")
+                }
+            }
+            // Save the Project ID
+            if let projectID = Project.defaultID {
+                let fileManager = NSFileManager()
+                if let documentsDirectory = fileManager.URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).first {
+                    if !fileManager.fileExistsAtPath(documentsDirectory.absoluteString + Project.Names.defaultFile) {
+                        let defaultIDData = projectID.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+                        let fileCreated = fileManager.createFileAtPath(documentsDirectory.path! + Project.Names.defaultFile, contents: defaultIDData, attributes: nil)
+                    }
+                }
+            }
+            
+            do {
+                try context.save()
+            } catch let error {
+                print("\(error)")
+            }
+            
+        } else {
+            let fileManager = NSFileManager()
+            if let documentsDirectory = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first {
+                do {
+                    try Project.defaultID = NSString(contentsOfFile: documentsDirectory.path! + Project.Names.defaultFile, encoding: NSUTF8StringEncoding) as String
+                } catch {
+                    print("File not read")
                 }
             }
         }
-        do {
-            try context.save()
-        } catch let error {
-            print("\(error)")
-        }
-    
         return true
     }
 
@@ -85,6 +115,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
+        
+        
+        
         self.saveContext()
     }
 
