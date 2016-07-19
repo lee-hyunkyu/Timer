@@ -56,9 +56,17 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="3KN-Zi-nVG" secondAttribute="bottom" id="WGU-WA-ik1"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="Wuz-Zg-7kg" secondAttribute="bottom" id="WNC-j7-glB"/>
                                         <constraint firstAttribute="topMargin" secondItem="3KN-Zi-nVG" secondAttribute="top" id="mwQ-Yy-QZ1"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Wuz-Zg-7kg" secondAttribute="bottom" id="rwm-xC-K0d"/>
+                                        <constraint firstAttribute="topMargin" secondItem="Wuz-Zg-7kg" secondAttribute="top" id="sow-V6-j4b"/>
                                         <constraint firstItem="Wuz-Zg-7kg" firstAttribute="leading" secondItem="IeL-vq-5lS" secondAttribute="trailing" constant="8" id="vPp-ez-5nw"/>
                                         <constraint firstItem="IeL-vq-5lS" firstAttribute="top" secondItem="f6Y-p0-s4S" secondAttribute="topMargin" id="zdj-vB-mjj"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="4PP-Ud-I8R"/>
+                                            <exclude reference="WNC-j7-glB"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="actionButton" destination="3KN-Zi-nVG" id="dFD-ag-f2t"/>
@@ -73,7 +81,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Rhd-O6-uXX">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="0JK-w3-29o">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="0JK-w3-29o">
                             <connections>
                                 <action selector="createNewTimer:" destination="z2E-Al-CGu" id="Hva-G7-b7O"/>
                             </connections>

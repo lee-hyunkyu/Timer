@@ -26,6 +26,7 @@ class TimerTableViewController: UITableViewController {
     
     @IBAction func createNewTimer(sender: UIBarButtonItem) {
         
+                
     }
     // MARK: View
 
@@ -57,15 +58,28 @@ class TimerTableViewController: UITableViewController {
         return projects[section].subTimers?.count ?? 0
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(Cells.TimerCell, forIndexPath: indexPath)
 
-        // Configure the cell...
+        if let timerCell = cell as? TimerTableViewCell {
+            let projectData = projects[indexPath.section]
+            let timerSet = projectData.subTimers?.allObjects as! [Timer]
+            let timerID = projectData.orderOfTimers[indexPath.row]
+            var timer: Timer?
+            for possibleTimer in timerSet {
+                if possibleTimer.id == timerID {
+                    timer = possibleTimer
+                }
+            }
+            timerCell.nameOfTimerLabel?.text = timer?.name
+            timerCell.timerLabel?.text = timer?.id?.substringToIndex((timer?.id?.startIndex.advancedBy(4))!)
+            
+        }
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
