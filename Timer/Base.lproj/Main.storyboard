@@ -16,7 +16,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Timer" rowHeight="74" id="pB7-zC-ITB" customClass="TimerTableViewCell" customModule="Timer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="114" width="600" height="74"/>
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="74"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pB7-zC-ITB" id="f6Y-p0-s4S">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="73.5"/>
