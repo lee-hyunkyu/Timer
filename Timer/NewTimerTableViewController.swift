@@ -13,6 +13,7 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
     var context: NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
     var projects: [Project]!
     var selectedProject: Project?
+    var timerName: String?
     
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
@@ -122,6 +123,7 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        timerName = textField.text
         doneButton.enabled = true
         doneButton.tintColor = nil
         return true
