@@ -13,7 +13,7 @@ class TimerTableViewController: UITableViewController {
     
     // MARK: Model
     
-    var context: NSManagedObjectContext = ((UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext)!
+    var context: NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
     var projects = [Project]()
     
     // MARK: Constants
@@ -28,18 +28,21 @@ class TimerTableViewController: UITableViewController {
         /*
          Create a series of random timers
          */
-        context.performBlockAndWait { [unowned self] in 
+        context?.performBlockAndWait { [unowned self] in
             for project in 0..<5 {
-                Project.createProjectWithName("\(project) Project", inManagedObjectContext: self.context)
+                if let newProject = Project.createProjectWithName("\(project) Project", inManagedObjectContext: self.context!) {
+                    projects.append(newProject)
+                }
             }
+            
             for project in 0..<5 {
                 for timer in 0..<6 {
-                    Timer.createTimerWithInfo("\(timer) Timer", inProject: self.projects[project], inManagedObjectContext: self.context)
+                    Timer.createTimerWithInfo("\(timer) Timer", inProject: self.projects[project], inManagedObjectContext: self.context!)
                 }
             }
         }
         do {
-            try self.context.save()
+            try self.context?.save()
         } catch let error {
             print("Error: \(error)")
         }
@@ -61,14 +64,14 @@ class TimerTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of sections
         // Number of Projects
         let request = NSFetchRequest(entityName: Project.Names.Entity)
-        return context.countForFetchRequest(request, error: nil)
+        return context?.countForFetchRequest(request, error: nil) ?? 0
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if projects.isEmpty {
             let request = NSFetchRequest(entityName: Project.Names.Entity)
-            if let projectResults = (try? context.executeFetchRequest(request)) as? [Project] {
+            if let projectResults = (try? context?.executeFetchRequest(request)) as? [Project] {
                 projects = projectResults
             }
         }
