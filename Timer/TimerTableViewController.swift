@@ -146,6 +146,7 @@ class TimerTableViewController: UITableViewController {
     @IBAction func addNewTimer(segue: UIStoryboardSegue) {
         if let newTimerVC = segue.sourceViewController as? NewTimerTableViewController {
             let timerName = newTimerVC.timerName
+            print(timerName)
             if let project = newTimerVC.selectedProject {
                 context?.performBlockAndWait { [unowned self] in
                     Timer.createTimerWithInfo(timerName!, inProject: project, inManagedObjectContext: self.context!)
@@ -155,8 +156,22 @@ class TimerTableViewController: UITableViewController {
                 } catch let error {
                     print("\(error)")
                 }
+            }else {
+                let request = NSFetchRequest(entityName: Project.Names.Entity)
+                request.predicate = NSPredicate(format: "\(Project.Names.ID) = %@" , Project.defaultID!)
+                context?.performBlockAndWait { [unowned self] in
+                    if let defaultProject = (try? self.context!.executeFetchRequest(request))?.first as? Project {
+                        Timer.createTimerWithInfo(timerName!, inProject: defaultProject, inManagedObjectContext: self.context!)
+                    }
+                }
             }
         }
+        do {
+            try context?.save()
+        } catch let error {
+            print("\(error)")
+        }
+        tableView.reloadData()
         
     }
 
