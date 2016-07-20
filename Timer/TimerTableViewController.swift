@@ -145,16 +145,14 @@ class TimerTableViewController: UITableViewController {
     
     @IBAction func addNewTimer(segue: UIStoryboardSegue) {
         if let newTimerVC = segue.sourceViewController as? NewTimerTableViewController {
+            print("Source View Controller")
             let timerName = newTimerVC.timerName
+            print(timerName)
             if let project = newTimerVC.selectedProject {
                 print(project.name)
                 context?.performBlockAndWait { [unowned self] in
                     Timer.createTimerWithInfo(timerName!, inProject: project, inManagedObjectContext: self.context!)
-                }
-                do {
-                    try context?.save()
-                } catch let error {
-                    print("\(error)")
+                    print("Success")
                 }
             }else {
                 let request = NSFetchRequest(entityName: Project.Names.Entity)
@@ -169,8 +167,9 @@ class TimerTableViewController: UITableViewController {
         do {
             try context?.save()
         } catch let error {
-            print("\(error)")
+            print("Outside \(error)")
         }
+        projects = [Project]()                                                  // In order to force a re-request of Core Data
         tableView.reloadData()
         
     }

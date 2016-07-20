@@ -18,6 +18,8 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
     }
     var selectedProject: Project?
     var timerName: String?
+    var addNewProjectCell: AddNewProjectTableViewCell?
+    var newProjectName: String?
     
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
@@ -69,6 +71,7 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
                 if let newProjectCell = cell as? AddNewProjectTableViewCell {
                     newProjectCell.AddProjectButton.enabled = false
                     newProjectCell.textField.delegate = self
+                    addNewProjectCell = newProjectCell
                 }
             } else {
                 cell = tableView.dequeueReusableCellWithIdentifier(Cells.Project, forIndexPath: indexPath)
@@ -133,7 +136,14 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func addProject(sender: UIButton) {
         context?.performBlockAndWait { [unowned self] in
-            
+            if let projectName = self.newProjectName, let project = Project.createProjectWithName(projectName, inManagedObjectContext: self.context!) {
+                self.projects.append(project)
+            }
+        }
+        do {
+            try context?.save()
+        } catch let error {
+            print("Add Project Error")
         }
         
         /*
@@ -162,9 +172,15 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        timerName = textField.text
-        doneButton.enabled = true
-        doneButton.tintColor = nil
+        if textField.placeholder != nil { // the text field is for add new project
+            addNewProjectCell?.AddProjectButton.enabled = true
+            addNewProjectCell?.AddProjectButton.tintColor = nil
+            newProjectName = textField.text
+        } else { // the text field is for the task name
+            timerName = textField.text
+            doneButton.enabled = true
+            doneButton.tintColor = nil
+        }
         return true
     }
     
