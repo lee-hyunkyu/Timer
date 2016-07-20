@@ -11,7 +11,11 @@ import CoreData
 class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
     
     var context: NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-    var projects: [Project]!
+    var projects: [Project]! {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     var selectedProject: Project?
     var timerName: String?
     
@@ -63,8 +67,8 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
                 // This is the last row so this is were you add a new project
                 cell = tableView.dequeueReusableCellWithIdentifier(Cells.NewProject, forIndexPath: indexPath)
                 if let newProjectCell = cell as? AddNewProjectTableViewCell {
-                    newProjectCell.context = context
                     newProjectCell.AddProjectButton.enabled = false
+                    newProjectCell.textField.delegate = self
                 }
             } else {
                 cell = tableView.dequeueReusableCellWithIdentifier(Cells.Project, forIndexPath: indexPath)
@@ -124,6 +128,30 @@ class NewTimerTableViewController: UITableViewController, UITextFieldDelegate {
         return true
     }
     */
+    
+    // MARK: Storyboard 
+    
+    @IBAction func addProject(sender: UIButton) {
+        context?.performBlockAndWait { [unowned self] in
+            
+        }
+        
+        /*
+        context?.performBlockAndWait { [unowned self] in
+            if let project = Project.createProjectWithName(self.textField.text!, inManagedObjectContext: self.context!) {
+                self.tableViewController!.projects.append(project)
+                print("Success")
+            }
+        }
+        do {
+            try context?.save()
+        } catch let error {
+            print("Error")
+            print("Add Project")
+        }
+ */
+    }
+    
     
     // MARK: - Text Field Delegate
     

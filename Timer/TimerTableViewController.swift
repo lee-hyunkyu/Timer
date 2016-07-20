@@ -146,8 +146,8 @@ class TimerTableViewController: UITableViewController {
     @IBAction func addNewTimer(segue: UIStoryboardSegue) {
         if let newTimerVC = segue.sourceViewController as? NewTimerTableViewController {
             let timerName = newTimerVC.timerName
-            print(timerName)
             if let project = newTimerVC.selectedProject {
+                print(project.name)
                 context?.performBlockAndWait { [unowned self] in
                     Timer.createTimerWithInfo(timerName!, inProject: project, inManagedObjectContext: self.context!)
                 }

@@ -176,7 +176,7 @@
                                                         <color key="titleColor" red="0.20235807107904175" green="0.83812581806282727" blue="0.4613998644903573" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="addProject" destination="zqr-Aj-pWh" eventType="touchUpInside" id="4Co-yF-NHN"/>
+                                                        <action selector="addProject:" destination="oO1-0m-pwj" eventType="touchUpInside" id="p8p-8t-RuZ"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -205,7 +205,7 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Dny-IC-8rP">
                             <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="jMn-w7-bKM" kind="unwind" unwindAction="addNewTimer:" id="YML-Ru-LQ1"/>
+                                <segue destination="jMn-w7-bKM" kind="unwind" unwindAction="cancelNewTimer:" id="TKS-T0-hdV"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="Cjm-ck-GAi">
