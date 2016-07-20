@@ -22,6 +22,7 @@
 		471EB64E1D3D875400A8B8C7 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471EB6481D3D875400A8B8C7 /* Session.swift */; };
 		472A1C981D3DC6BC00B3EED2 /* NewTimerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472A1C971D3DC6BC00B3EED2 /* NewTimerTableViewController.swift */; };
 		472A1C9B1D3DD72500B3EED2 /* NewTimerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472A1C9A1D3DD72500B3EED2 /* NewTimerTableViewCell.swift */; };
+		478976E11D3EDC2C005B3BE4 /* AddNewProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478976E01D3EDC2C005B3BE4 /* AddNewProjectTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		471EB6481D3D875400A8B8C7 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		472A1C971D3DC6BC00B3EED2 /* NewTimerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTimerTableViewController.swift; sourceTree = "<group>"; };
 		472A1C9A1D3DD72500B3EED2 /* NewTimerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTimerTableViewCell.swift; sourceTree = "<group>"; };
+		478976E01D3EDC2C005B3BE4 /* AddNewProjectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewProjectTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			children = (
 				472A1C9A1D3DD72500B3EED2 /* NewTimerTableViewCell.swift */,
 				472A1C971D3DC6BC00B3EED2 /* NewTimerTableViewController.swift */,
+				478976E01D3EDC2C005B3BE4 /* AddNewProjectTableViewCell.swift */,
 			);
 			name = NewTimer;
 			sourceTree = "<group>";
@@ -186,6 +189,7 @@
 				471EB64D1D3D875400A8B8C7 /* Session+CoreDataProperties.swift in Sources */,
 				471EB6321D3D7A6F00A8B8C7 /* Timer.xcdatamodeld in Sources */,
 				471EB6411D3D83DD00A8B8C7 /* TimerTableViewController.swift in Sources */,
+				478976E11D3EDC2C005B3BE4 /* AddNewProjectTableViewCell.swift in Sources */,
 				472A1C9B1D3DD72500B3EED2 /* NewTimerTableViewCell.swift in Sources */,
 				472A1C981D3DC6BC00B3EED2 /* NewTimerTableViewController.swift in Sources */,
 				471EB62A1D3D7A6F00A8B8C7 /* AppDelegate.swift in Sources */,
