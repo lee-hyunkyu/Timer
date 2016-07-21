@@ -65,15 +65,10 @@ class TimerTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(Cells.TimerCell, forIndexPath: indexPath)
 
         if let timerCell = cell as? TimerTableViewCell {
-            let projectData = projects[indexPath.section]
-            let timerSet = projectData.subTimers?.allObjects as! [Timer]
-            let timerID = projectData.orderOfTimers[indexPath.row]
-            var timer: Timer?
-            for possibleTimer in timerSet {
-                if possibleTimer.id == timerID {
-                    timer = possibleTimer
-                }
-            }
+            
+            let project = projects[indexPath.section]
+            let timerID = project.orderOfTimers[indexPath.row]
+            let timer = project.timerWithID(timerID)
             timerCell.timer = timer
             timerCell.nameOfTimerLabel?.text = timer?.name
             if let (_, minutes, seconds) = timer?.currentValue() {

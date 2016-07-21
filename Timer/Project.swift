@@ -50,7 +50,6 @@ class Project: NSManagedObject {
         }
     }
     
-    // class func 
     // For every project, retrieve the order of timers
     class func setOrderOfTimers(context: NSManagedObjectContext) {
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -70,6 +69,16 @@ class Project: NSManagedObject {
                 defaults.setObject(project.orderOfTimers, forKey: Names.orderOfTimers + project.id!)
             }
         }
+    }
+    
+    func timerWithID(id: String) -> Timer? {
+        let timers = self.subTimers?.allObjects as! [Timer]
+        for timer in timers {
+            if timer.id == id {
+                return timer
+            }
+        }
+        return nil
     }
     
     struct Names {
