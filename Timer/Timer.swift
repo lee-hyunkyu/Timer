@@ -62,13 +62,13 @@ class Timer: NSManagedObject {
         
         // in case seconds, minutes overflow
         if allSeconds > Int(Session.SecondsInOneMinute) {
-            let overflowMinutes = allSeconds % Int(Session.SecondsInOneMinute)
+            let overflowMinutes = allSeconds/Int(Session.SecondsInOneMinute)
             allSeconds -= overflowMinutes*Int(Session.SecondsInOneMinute)
             allMinutes += overflowMinutes
         }
         if allMinutes > Int(Session.MinutesInOneHour) {
-            let overflowHours = allMinutes % Int(Session.MinutesInOneHour)
-            allMinutes -= overflowHours * Int(Session.MinutesInOneHour)
+            let overflowHours = allMinutes/Int(Session.MinutesInOneHour)
+            allMinutes -= overflowHours*Int(Session.MinutesInOneHour)
             allHours += overflowHours
         }
         return (allHours, allMinutes, allSeconds)
