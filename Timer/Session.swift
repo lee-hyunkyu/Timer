@@ -69,5 +69,6 @@ class Session: NSManagedObject {
     }
     static let SecondsInOneHour = 3600.0
     static let SecondsInOneMinute = 60.0
+    static let MinutesInOneHour = 60.0
     
 }

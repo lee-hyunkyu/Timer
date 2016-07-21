@@ -33,6 +33,47 @@ class Timer: NSManagedObject {
         
     }
     
+    func currentValue() -> (Int, Int, Int) {
+        var today: NSDate {
+            return NSCalendar.currentCalendar().startOfDayForDate(NSDate())
+        }
+        var todaySessions: [Session] {
+            var sessions = [Session]()
+            if let sessionsInTimer = self.sessions {
+                for element in sessionsInTimer {
+                    if let session = element as? Session, let earlierDate = session.startTime?.earlierDate(today) {
+                        if earlierDate.isEqualToDate(today) {
+                            sessions.append(session)
+                        }
+                    }
+                }
+            }
+            return sessions
+        }
+        var allHours = 0
+        var allMinutes = 0
+        var allSeconds = 0
+        for session in todaySessions {
+            let (hourInSession, minuteInSession, secondInSession) = session.convertSessionValue()
+            allHours += hourInSession
+            allMinutes += minuteInSession
+            allSeconds += secondInSession
+        }
+        
+        // in case seconds, minutes overflow
+        if allSeconds > Int(Session.SecondsInOneMinute) {
+            let overflowMinutes = allSeconds % Int(Session.SecondsInOneMinute)
+            allSeconds -= overflowMinutes*Int(Session.SecondsInOneMinute)
+            allMinutes += overflowMinutes
+        }
+        if allMinutes > Int(Session.MinutesInOneHour) {
+            let overflowHours = allMinutes % Int(Session.MinutesInOneHour)
+            allMinutes -= overflowHours * Int(Session.MinutesInOneHour)
+            allHours += overflowHours
+        }
+        return (allHours, allMinutes, allSeconds)
+    }
+    
     struct Names {
         static let ProjectSet = "projects"
         static let Entity = "Timer"
