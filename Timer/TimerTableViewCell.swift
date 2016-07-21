@@ -38,10 +38,7 @@ class TimerTableViewCell: UITableViewCell {
             
         } else {
             actionButton.setTitle(Names.StartTitle, forState: .Normal)
-            let session = timer.getCurrentSession()
-            timer.isActive = false                                              // must go after .getCurrentSession depends on isActive being false
-            session?.endTime = NSDate()
-            print(timer.currentValue())
+            timer.endSession()
             
             if let (_, minutes, seconds) = timer?.currentValue() {
                 let minuteTime = "\(minutes)".asTimeValue()

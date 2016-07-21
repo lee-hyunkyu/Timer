@@ -77,23 +77,14 @@ class Timer: NSManagedObject {
         return (allHours, allMinutes, allSeconds)
     }
     
-    func getCurrentSession() -> Session? {
+    func endSession() {
         if isActive as! Bool {
-            var latestSession: Session?
-            var sessions = [Session]()
-            if let sessionsSet = self.sessions {
-                for element in sessionsSet {
-                    sessions.append(element as! Session)
-                }
-            }
-            for session in sessions {
+            for session in self.sessions?.allObjects as! [Session] {
                 if session.endTime == nil {
-                    latestSession = session
+                    session.endTime = NSDate()
                 }
             }
-            return latestSession
         }
-        return nil
     }
     
     struct Names {
