@@ -35,6 +35,7 @@ class TimerTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateProjects()
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,12 +53,6 @@ class TimerTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if projects.isEmpty {
-            let request = NSFetchRequest(entityName: Project.Names.Entity)
-            if let projectResults = (try? context?.executeFetchRequest(request)) as? [Project] {
-                projects = projectResults
-            }
-        }
         return projects[section].subTimers?.count ?? 0
     }
 
@@ -176,9 +171,16 @@ class TimerTableViewController: UITableViewController {
         } catch let error {
             print("Outside \(error)")
         }
-        projects = [Project]()                                                  // In order to force a re-request of Core Data
+        updateProjects()
         tableView.reloadData()
         
+    }
+    
+    func updateProjects() {
+        let request = NSFetchRequest(entityName: Project.Names.Entity)
+        if let projectResults = (try? context?.executeFetchRequest(request)) as? [Project] {
+            projects = projectResults
+        }
     }
 
 }
