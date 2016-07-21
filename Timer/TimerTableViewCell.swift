@@ -27,18 +27,23 @@ class TimerTableViewCell: UITableViewCell {
             actionButton.setTitle(Names.CancelTitle, forState: UIControlState.Normal)
             context?.performBlockAndWait { [unowned self] in
                 Session.createSessionToTimer(self.timer, inManagedObjectContext: self.context!)
+                self.timer.isActive = true
             }
             do {
                 try context?.save()
             } catch {
                 print("Context save error, ChangeTimerStatus")
             }
-            
-            timer.isActive = true
-            
         } else {
             actionButton.setTitle(Names.StartTitle, forState: .Normal)
-            timer.endSession()
+            context?.performBlockAndWait { [unowned self] in
+                self.timer.endSession()
+            }
+            do {
+                try context?.save()
+            } catch {
+                print("Context save error, Change Timer Status else")
+            }
             
             if let (_, minutes, seconds) = timer?.currentValue() {
                 let minuteTime = "\(minutes)".asTimeValue()
