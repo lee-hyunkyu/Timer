@@ -82,6 +82,7 @@ class TimerTableViewController: UITableViewController {
             } else {
                 timerCell.timerLabel.text = "00:00"
             }
+            timerCell.context = self.context
         }
         return cell
     }

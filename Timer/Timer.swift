@@ -74,6 +74,17 @@ class Timer: NSManagedObject {
         return (allHours, allMinutes, allSeconds)
     }
     
+    func getCurrentSession() -> Session? {
+        if isActive == true {
+            var latestSession: Session?
+            for session in self.sessions! {
+                latestSession = (session as! Session)
+            }
+            return latestSession
+        }
+        return nil
+    }
+    
     struct Names {
         static let ProjectSet = "projects"
         static let Entity = "Timer"
