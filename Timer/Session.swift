@@ -44,17 +44,17 @@ class Session: NSManagedObject {
             endTime = NSDate()
         }
         
-        var remainingDifferenceInSeconds = endTime.timeIntervalSinceDate(self.startTime!) as Double
+        var remainingDifferenceInSeconds = Int(endTime.timeIntervalSinceDate(self.startTime!) as Double)
         
         // Find difference in Hours
         
-        let hours = Int(remainingDifferenceInSeconds/Session.SecondsInOneHour)
-        remainingDifferenceInSeconds -= hours*Session.SecondsInOneHour
+        let hours = remainingDifferenceInSeconds/Int(Session.SecondsInOneHour)
+        remainingDifferenceInSeconds -= hours*Int(Session.SecondsInOneHour)
         
         // Find difference in Minutes
         
-        let minutes = Int(remainingDifferenceInSeconds/Session.SecondsInOneMinute)
-        remainingDifferenceInSeconds -= minutes*Session.SecondsInOneMinute
+        let minutes = remainingDifferenceInSeconds/Int(Session.SecondsInOneMinute)
+        remainingDifferenceInSeconds -= minutes*Int(Session.SecondsInOneMinute)
         
         // Find difference in Seconds
         
