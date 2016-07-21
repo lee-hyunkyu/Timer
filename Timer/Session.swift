@@ -48,12 +48,12 @@ class Session: NSManagedObject {
         
         // Find difference in Hours
         
-        let hours = remainingDifferenceInSeconds % Session.SecondsInOneHour
+        let hours = Int(remainingDifferenceInSeconds/Session.SecondsInOneHour)
         remainingDifferenceInSeconds -= hours*Session.SecondsInOneHour
         
         // Find difference in Minutes
         
-        let minutes = remainingDifferenceInSeconds % Session.SecondsInOneMinute
+        let minutes = Int(remainingDifferenceInSeconds/Session.SecondsInOneMinute)
         remainingDifferenceInSeconds -= minutes*Session.SecondsInOneMinute
         
         // Find difference in Seconds
