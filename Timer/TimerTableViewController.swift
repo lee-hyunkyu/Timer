@@ -70,12 +70,11 @@ class TimerTableViewController: UITableViewController {
             let timerID = project.orderOfTimers[indexPath.row]
             let timer = project.timerWithID(timerID)
             timerCell.timer = timer
-            timerCell.nameOfTimerLabel?.text = timer?.name
+            timerCell.nameOfTimerLabel?.text = timer?.name ?? "No Name"
             if let (_, minutes, seconds) = timer?.currentValue() {
                 let minuteTime = "\(minutes)".asTimeValue()
                 let secondTime = "\(seconds)".asTimeValue()
                 timerCell.timerLabel.text = minuteTime + ":" + secondTime             // ignore hours for now, will add later
-                print(minuteTime + ":" + secondTime)
             } else {
                 timerCell.timerLabel.text = "00:00"
             }
