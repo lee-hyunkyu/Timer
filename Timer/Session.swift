@@ -25,7 +25,15 @@ class Session: NSManagedObject {
             }
         }
         return nil
-        
+    }
+    
+    func endSession() -> Bool {
+        if self.endTime != nil {
+            return false
+        } else {
+            self.endTime = NSDate()
+            return true
+        }
     }
     
     struct Names {
