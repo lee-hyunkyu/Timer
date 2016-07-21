@@ -21,6 +21,7 @@ class TimerTableViewCell: UITableViewCell {
     @IBOutlet weak var nameOfTimerLabel: UILabel!
     var timer: Timer!
     var context: NSManagedObjectContext?
+    weak var timeTracker: NSTimer?
     
     @IBAction func changeTimerStatus(sender: UIButton) {
         if actionButton.currentTitle == Names.StartTitle {
@@ -33,6 +34,7 @@ class TimerTableViewCell: UITableViewCell {
             } catch {
                 print("Context save error, ChangeTimerStatus")
             }
+            timeTracker = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(fire(_:)), userInfo: nil, repeats: true)
         } else {
             actionButton.setTitle(Names.StartTitle, forState: .Normal)
             context?.performBlockAndWait { [unowned self] in
@@ -45,8 +47,14 @@ class TimerTableViewCell: UITableViewCell {
             }
             
             self.timerLabel.text = timer.timerValueAsString()
+            timeTracker?.invalidate()
+            timeTracker = nil
         }
     }
     
+    func fire(timer: NSTimer) {
+        print("Updating")
+        self.timerLabel.text = self.timer.timerValueAsString()
+    }
 
 }
