@@ -85,6 +85,7 @@ class Timer: NSManagedObject {
                 }
             }
         }
+        self.isActive = false
     }
     
     func timerValueAsString() -> String {

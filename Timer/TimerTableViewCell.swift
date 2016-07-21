@@ -27,7 +27,6 @@ class TimerTableViewCell: UITableViewCell {
             actionButton.setTitle(Names.CancelTitle, forState: UIControlState.Normal)
             context?.performBlockAndWait { [unowned self] in
                 Session.createSessionToTimer(self.timer, inManagedObjectContext: self.context!)
-                self.timer.isActive = true
             }
             do {
                 try context?.save()

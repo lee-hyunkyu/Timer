@@ -21,6 +21,7 @@ class Session: NSManagedObject {
                 newSession.endTime = nil
                 let timerSessions = timer.mutableSetValueForKey(Timer.Names.Sessions)
                 timerSessions.addObject(newSession)
+                newSession.timer?.isActive = true
                 return newSession
             }
         }
