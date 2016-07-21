@@ -45,14 +45,7 @@ class TimerTableViewCell: UITableViewCell {
                 print("Context save error, Change Timer Status else")
             }
             
-            if let (_, minutes, seconds) = timer?.currentValue() {
-                let minuteTime = "\(minutes)".asTimeValue()
-                let secondTime = "\(seconds)".asTimeValue()
-                self.timerLabel.text = minuteTime + ":" + secondTime             // ignore hours for now, will add later
-                print(minuteTime + ":" + secondTime)
-            } else {
-                
-            }
+            self.timerLabel.text = timer.timerValueAsString()
         }
     }
     

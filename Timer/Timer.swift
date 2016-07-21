@@ -33,7 +33,7 @@ class Timer: NSManagedObject {
         
     }
     
-    func currentValue() -> (Int, Int, Int) {
+    private func currentValue() -> (Int, Int, Int) {
         var today: NSDate {
             return NSCalendar.currentCalendar().startOfDayForDate(NSDate())
         }
@@ -85,6 +85,11 @@ class Timer: NSManagedObject {
                 }
             }
         }
+    }
+    
+    func timerValueAsString() -> String {
+        let (hours, minutes, seconds) = self.currentValue()
+        return "\(hours)".asTimeValue() + ":" + "\(minutes)".asTimeValue() + ":" + "\(seconds)".asTimeValue()
     }
     
     struct Names {
