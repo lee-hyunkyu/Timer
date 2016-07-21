@@ -13,6 +13,7 @@ class TimerTableViewCell: UITableViewCell {
     @IBOutlet weak var actionButton: UIButton!                                  // will be used to either start or stop the timer
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var nameOfTimerLabel: UILabel!
+    var timer: Timer!
     
     @IBAction func changeTimerStatus(sender: UIButton) {
     }

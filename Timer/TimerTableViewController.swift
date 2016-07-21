@@ -75,6 +75,7 @@ class TimerTableViewController: UITableViewController {
                     timer = possibleTimer
                 }
             }
+            timerCell.timer = timer
             timerCell.nameOfTimerLabel?.text = timer?.name
             timerCell.timerLabel?.text = timer?.id?.substringToIndex((timer?.id?.startIndex.advancedBy(4))!)
             
