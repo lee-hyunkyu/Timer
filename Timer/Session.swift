@@ -36,9 +36,38 @@ class Session: NSManagedObject {
         }
     }
     
-    struct Names {
-        static let Entity = "Session"
+    func convertSessionValue() -> (Int, Int, Int) {                             //Hour, Minute, Seconds
+        var endTime: NSDate                                                     //Value to compare to
+        if self.endTime != nil {
+            endTime = self.endTime!
+        } else {
+            endTime = NSDate()
+        }
+        
+        var remainingDifferenceInSeconds = endTime.timeIntervalSinceDate(self.startTime!) as Double
+        
+        // Find difference in Hours
+        
+        let hours = remainingDifferenceInSeconds % Session.SecondsInOneHour
+        remainingDifferenceInSeconds -= hours*Session.SecondsInOneHour
+        
+        // Find difference in Minutes
+        
+        let minutes = remainingDifferenceInSeconds % Session.SecondsInOneMinute
+        remainingDifferenceInSeconds -= minutes*Session.SecondsInOneMinute
+        
+        // Find difference in Seconds
+        
+        let seconds = remainingDifferenceInSeconds
+        
+        return (Int(hours), Int(minutes), Int(seconds))
         
     }
+    
+    struct Names {
+        static let Entity = "Session"
+    }
+    static let SecondsInOneHour = 3600.0
+    static let SecondsInOneMinute = 60.0
     
 }
