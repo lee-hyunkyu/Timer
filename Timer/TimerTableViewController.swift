@@ -48,7 +48,11 @@ class TimerTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of sections
         // Number of Projects
         let request = NSFetchRequest(entityName: Project.Names.Entity)
-        return context?.countForFetchRequest(request, error: nil) ?? 0
+        var count = 0
+        context?.performBlockAndWait { [unowned self] in
+            count = self.context?.countForFetchRequest(request, error: nil) ?? 0
+        }
+        return count
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -177,9 +181,11 @@ class TimerTableViewController: UITableViewController {
     }
     
     func updateProjects() {
-        let request = NSFetchRequest(entityName: Project.Names.Entity)
-        if let projectResults = (try? context?.executeFetchRequest(request)) as? [Project] {
-            projects = projectResults
+        context?.performBlockAndWait { [unowned self] in
+            let request = NSFetchRequest(entityName: Project.Names.Entity)
+            if let projectResults = (try? self.context!.executeFetchRequest(request)) as? [Project] {
+                self.projects = projectResults
+            }
         }
     }
 
