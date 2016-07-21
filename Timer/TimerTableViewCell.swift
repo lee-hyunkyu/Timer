@@ -28,12 +28,29 @@ class TimerTableViewCell: UITableViewCell {
             context?.performBlockAndWait { [unowned self] in
                 Session.createSessionToTimer(self.timer, inManagedObjectContext: self.context!)
             }
+            do {
+                try context?.save()
+            } catch {
+                print("Context save error, ChangeTimerStatus")
+            }
+            
             timer.isActive = true
+            
         } else {
-            timer.isActive = false
             actionButton.setTitle(Names.StartTitle, forState: .Normal)
             let session = timer.getCurrentSession()
+            timer.isActive = false                                              // must go after .getCurrentSession depends on isActive being false
             session?.endTime = NSDate()
+            print(timer.currentValue())
+            
+            if let (_, minutes, seconds) = timer?.currentValue() {
+                let minuteTime = "\(minutes)".asTimeValue()
+                let secondTime = "\(seconds)".asTimeValue()
+                self.timerLabel.text = minuteTime + ":" + secondTime             // ignore hours for now, will add later
+                print(minuteTime + ":" + secondTime)
+            } else {
+                
+            }
         }
     }
     

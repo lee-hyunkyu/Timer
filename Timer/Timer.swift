@@ -50,6 +50,8 @@ class Timer: NSManagedObject {
             }
             return sessions
         }
+        
+        
         var allHours = 0
         var allMinutes = 0
         var allSeconds = 0
@@ -66,6 +68,7 @@ class Timer: NSManagedObject {
             allSeconds -= overflowMinutes*Int(Session.SecondsInOneMinute)
             allMinutes += overflowMinutes
         }
+        
         if allMinutes > Int(Session.MinutesInOneHour) {
             let overflowHours = allMinutes/Int(Session.MinutesInOneHour)
             allMinutes -= overflowHours*Int(Session.MinutesInOneHour)
@@ -75,10 +78,18 @@ class Timer: NSManagedObject {
     }
     
     func getCurrentSession() -> Session? {
-        if isActive == true {
+        if isActive as! Bool {
             var latestSession: Session?
-            for session in self.sessions! {
-                latestSession = (session as! Session)
+            var sessions = [Session]()
+            if let sessionsSet = self.sessions {
+                for element in sessionsSet {
+                    sessions.append(element as! Session)
+                }
+            }
+            for session in sessions {
+                if session.endTime == nil {
+                    latestSession = session
+                }
             }
             return latestSession
         }

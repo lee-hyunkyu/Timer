@@ -78,7 +78,10 @@ class TimerTableViewController: UITableViewController {
             timerCell.timer = timer
             timerCell.nameOfTimerLabel?.text = timer?.name
             if let (_, minutes, seconds) = timer?.currentValue() {
-                timerCell.timerLabel.text = "\(minutes):\(seconds)"             // ignore hours for now, will add later
+                let minuteTime = "\(minutes)".asTimeValue()
+                let secondTime = "\(seconds)".asTimeValue()
+                timerCell.timerLabel.text = minuteTime + ":" + secondTime             // ignore hours for now, will add later
+                print(minuteTime + ":" + secondTime)
             } else {
                 timerCell.timerLabel.text = "00:00"
             }
@@ -178,6 +181,16 @@ class TimerTableViewController: UITableViewController {
         
     }
 
+}
+
+extension String {
+    func asTimeValue() -> String {
+        if (self as NSString).intValue < 9 {
+            return "0".stringByAppendingString(self)
+        } else {
+            return self
+        }
+    }
 }
 
 
