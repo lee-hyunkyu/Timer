@@ -185,7 +185,7 @@ class TimerTableViewController: UITableViewController {
 
 extension String {
     func asTimeValue() -> String {
-        if (self as NSString).intValue < 9 {
+        if (self as NSString).intValue < 10 {
             return "0".stringByAppendingString(self)
         } else {
             return self
