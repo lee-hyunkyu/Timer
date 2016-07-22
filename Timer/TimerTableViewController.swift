@@ -15,11 +15,15 @@ class TimerTableViewController: UITableViewController {
     
     var context: NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
     var projects = [Project]()
+    let defaults = NSUserDefaults.standardUserDefaults()
+    var timers = [Timer]()
+    var orderOfTimers = [String]()
     
     // MARK: Constants
     
     private struct Cells {
         static let TimerCell = "Timer"                                          // Timer Cell Reuse Identifier
+        static let OrderOfTimers = "Order of Timers"
     }
     
     private struct Segues {
@@ -36,6 +40,8 @@ class TimerTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateProjects()
+        updateTimers()
+        setUpTimerOrder()
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,10 +78,12 @@ class TimerTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(Cells.TimerCell, forIndexPath: indexPath)
 
         if let timerCell = cell as? TimerTableViewCell {
-            
-            let project = projects[indexPath.section]
-            let timerID = project.orderOfTimers[indexPath.row]
-            let timer = project.timerWithID(timerID)
+            var timer: Timer?
+            for timerData in timers {
+                if timerData.id == orderOfTimers[indexPath.row] {
+                    timer = timerData
+                }
+            }
             timerCell.timer = timer
             timerCell.nameOfTimerLabel?.text = timer?.name ?? "No Name"
             timerCell.timerLabel.text = timerCell.timer?.timerValueAsString() ?? "00:00:00"
@@ -145,19 +153,19 @@ class TimerTableViewController: UITableViewController {
     }
     
     @IBAction func addNewTimer(segue: UIStoryboardSegue) {
+        var newTimer: Timer? = nil
         if let newTimerVC = segue.sourceViewController as? NewTimerTableViewController {
             let timerName = newTimerVC.timerName
-            print(timerName)
             if let project = newTimerVC.selectedProject {
                 context?.performBlockAndWait { [unowned self] in
-                    Timer.createTimerWithInfo(timerName!, inProject: project, inManagedObjectContext: self.context!)
+                    newTimer = Timer.createTimerWithInfo(timerName!, inProject: project, inManagedObjectContext: self.context!)
                 }
             }else {
                 let request = NSFetchRequest(entityName: Project.Names.Entity)
                 request.predicate = NSPredicate(format: "\(Project.Names.ID) = %@", Project.defaultID!)
                 context?.performBlockAndWait { [unowned self] in
                     if let defaultProject = (try? self.context!.executeFetchRequest(request))?.first as? Project {
-                        Timer.createTimerWithInfo(timerName!, inProject: defaultProject, inManagedObjectContext: self.context!)
+                        newTimer = Timer.createTimerWithInfo(timerName!, inProject: defaultProject, inManagedObjectContext: self.context!)
                     }
                 }
             }
@@ -168,6 +176,11 @@ class TimerTableViewController: UITableViewController {
             print("Outside \(error)")
         }
         updateProjects()
+        updateTimers()
+        if let timer = newTimer {
+            orderOfTimers.append(timer.id!)
+            defaults.setObject(orderOfTimers, forKey: Cells.OrderOfTimers)
+        }
         tableView.reloadData()
         
     }
@@ -178,6 +191,30 @@ class TimerTableViewController: UITableViewController {
             if let projectResults = (try? self.context!.executeFetchRequest(request)) as? [Project] {
                 self.projects = projectResults
             }
+        }
+    }
+    
+    func updateTimers() {
+        context?.performBlockAndWait { [unowned self] in
+            let request = NSFetchRequest(entityName: Timer.Names.Entity)
+            if let timerResults = (try? self.context!.executeFetchRequest(request)) as? [Timer] {
+                self.timers = timerResults
+            }
+            
+        }
+    }
+    
+    func setUpTimerOrder() {
+        if let order = defaults.objectForKey(Cells.OrderOfTimers) as? [String] {
+            orderOfTimers = order
+        } else {
+            orderOfTimers = [String]()
+            for project in projects {
+                for timer in (project.subTimers?.allObjects as! [Timer]) {
+                    orderOfTimers.append(timer.id!)
+                }
+            }
+            defaults.setObject(orderOfTimers, forKey: Cells.OrderOfTimers)
         }
     }
 
