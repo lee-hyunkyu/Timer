@@ -18,7 +18,11 @@ class TimerTableViewController: UITableViewController {
     var timers = [Timer]()
     
     let defaults = NSUserDefaults.standardUserDefaults()
-    var timerOrder = [String]()
+    var timerOrder = [String]() {
+        didSet {
+            defaults.setObject(timerOrder, forKey: Cells.Order)
+        }
+    }
     
     // MARK: Constants
     
@@ -38,10 +42,15 @@ class TimerTableViewController: UITableViewController {
     }
     // MARK: View
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         updateProjects()
         updateTimers()
+        updateOrder()        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
 
     override func didReceiveMemoryWarning() {
@@ -114,20 +123,30 @@ class TimerTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support rearranging the table view.
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
+        let movingTimerID = timerOrder[fromIndexPath.row]
+        if toIndexPath.row > fromIndexPath.row {
+            timerOrder.insert(movingTimerID, atIndex: toIndexPath.row + 1)
+        } else {
+            timerOrder.insert(movingTimerID, atIndex: toIndexPath.row)
+        }
+        if toIndexPath.row > fromIndexPath.row {
+            timerOrder.removeAtIndex(fromIndexPath.row)
+        } else {
+            timerOrder.removeAtIndex(fromIndexPath.row + 1)
+        }
+        updateOrder()
     }
-    */
+    
 
-    /*
+    
     // Override to support conditional rearranging of the table view.
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
         return true
     }
-    */
+    
 
     
     // MARK: - Navigation
@@ -154,19 +173,19 @@ class TimerTableViewController: UITableViewController {
     }
     
     @IBAction func addNewTimer(segue: UIStoryboardSegue) {
+        var newTimer: Timer?
         if let newTimerVC = segue.sourceViewController as? NewTimerTableViewController {
             let timerName = newTimerVC.timerName
-            print(timerName)
             if let project = newTimerVC.selectedProject {
                 context?.performBlockAndWait { [unowned self] in
-                    Timer.createTimerWithInfo(timerName!, inProject: project, inManagedObjectContext: self.context!)
+                    newTimer = Timer.createTimerWithInfo(timerName!, inProject: project, inManagedObjectContext: self.context!)
                 }
             }else {
                 let request = NSFetchRequest(entityName: Project.Names.Entity)
                 request.predicate = NSPredicate(format: "\(Project.Names.ID) = %@", Project.defaultID!)
                 context?.performBlockAndWait { [unowned self] in
                     if let defaultProject = (try? self.context!.executeFetchRequest(request))?.first as? Project {
-                        Timer.createTimerWithInfo(timerName!, inProject: defaultProject, inManagedObjectContext: self.context!)
+                        newTimer = Timer.createTimerWithInfo(timerName!, inProject: defaultProject, inManagedObjectContext: self.context!)
                     }
                 }
             }
@@ -176,8 +195,13 @@ class TimerTableViewController: UITableViewController {
         } catch let error {
             print("Outside \(error)")
         }
+        if let timer = newTimer {
+            timerOrder.append(timer.id!)
+            print("Timer Created")
+        }
         updateProjects()
         updateTimers()
+        updateOrder()
         tableView.reloadData()
         
     }
@@ -197,7 +221,6 @@ class TimerTableViewController: UITableViewController {
             if let timerRequest = (try? self.context!.executeFetchRequest(request)) as? [Timer] {
                 self.timers = timerRequest
             }
-            
         }
     }
     
@@ -207,6 +230,7 @@ class TimerTableViewController: UITableViewController {
             if !order.elementsEqual(timerOrder) {                               // timer order has changed
                 defaults.setObject(timerOrder, forKey: Cells.Order)
             }
+            timerOrder = order
         } else {
             for timer in timers {
                 timerOrder.append(timer.id!)
