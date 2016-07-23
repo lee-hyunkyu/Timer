@@ -17,10 +17,14 @@ class TimerTableViewController: UITableViewController {
     var projects = [Project]()
     var timers = [Timer]()
     
+    let defaults = NSUserDefaults.standardUserDefaults()
+    var timerOrder = [String]()
+    
     // MARK: Constants
     
     private struct Cells {
         static let TimerCell = "Timer"                                          // Timer Cell Reuse Identifier
+        static let Order = "Timer Order"
     }
     
     private struct Segues {
@@ -74,10 +78,13 @@ class TimerTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(Cells.TimerCell, forIndexPath: indexPath)
 
         if let timerCell = cell as? TimerTableViewCell {
-            
-            let project = projects[indexPath.section]
-            let timerID = project.orderOfTimers[indexPath.row]
-            let timer = project.timerWithID(timerID)
+            let timerID = timerOrder[indexPath.row]
+            var timer: Timer?
+            for timerData in timers {
+                if timerData.id == timerID {
+                    timer = timerData
+                }
+            }
             timerCell.timer = timer
             timerCell.nameOfTimerLabel?.text = timer?.name ?? "No Name"
             timerCell.timerLabel.text = timerCell.timer?.timerValueAsString() ?? "00:00:00"
@@ -175,7 +182,7 @@ class TimerTableViewController: UITableViewController {
         
     }
     
-    func updateProjects() {
+    private func updateProjects() {
         context?.performBlockAndWait { [unowned self] in
             let request = NSFetchRequest(entityName: Project.Names.Entity)
             if let projectResults = (try? self.context!.executeFetchRequest(request)) as? [Project] {
@@ -184,7 +191,7 @@ class TimerTableViewController: UITableViewController {
         }
     }
     
-    func updateTimers() {
+    private func updateTimers() {
         context?.performBlockAndWait { [unowned self] in
             let request = NSFetchRequest(entityName: Timer.Names.Entity)
             if let timerRequest = (try? self.context!.executeFetchRequest(request)) as? [Timer] {
@@ -193,7 +200,20 @@ class TimerTableViewController: UITableViewController {
             
         }
     }
-
+    
+    // must come after updateTimers()
+    private func updateOrder() {
+        if let order = defaults.objectForKey(Cells.Order) as? [String] {
+            if !order.elementsEqual(timerOrder) {                               // timer order has changed
+                defaults.setObject(timerOrder, forKey: Cells.Order)
+            }
+        } else {
+            for timer in timers {
+                timerOrder.append(timer.id!)
+            }
+            defaults.setObject(timerOrder, forKey: Cells.Order)
+        }
+    }
 }
 
 extension String {
