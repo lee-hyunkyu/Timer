@@ -170,6 +170,7 @@ class TimerTableViewController: UITableViewController {
             print("Outside \(error)")
         }
         updateProjects()
+        updateTimers()
         tableView.reloadData()
         
     }
