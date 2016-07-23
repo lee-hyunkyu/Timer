@@ -105,6 +105,11 @@ class TimerTableViewController: UITableViewController {
             timerCell.timerLabel.text = timerCell.timer?.timerValueAsString() ?? "00:00:00"
             timerCell.context = self.context
             timerCell.addGestureRecognizer(UITapGestureRecognizer(target: timerCell, action: #selector(TimerTableViewCell.showDifferentTimer(_:))))
+            if tableView.editing {
+                timerCell.actionButton.alpha = 0
+            } else {
+                timerCell.actionButton.alpha = 1
+            }
         }
         return cell
     }
@@ -133,9 +138,6 @@ class TimerTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         return .None
     }
-    
-    
-
     
     // Override to support rearranging the table view.
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
@@ -254,11 +256,21 @@ class TimerTableViewController: UITableViewController {
     func editCells(sender: UIBarButtonItem) {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(TimerTableViewController.doneEditingCells(_:)))
         UIView.animateWithDuration(0.5, animations: { [unowned self] in self.tableView.editing = true } , completion: nil)
+        for cell in self.tableView.visibleCells {
+            if let timerCell = cell as? TimerTableViewCell {
+                UIView.animateWithDuration(0.5, animations: {timerCell.actionButton.alpha = 0}, completion: nil)
+            }
+        }
     }
     
     func doneEditingCells(sender: UIBarButtonItem) {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(TimerTableViewController.editCells(_:)))
         UIView.animateWithDuration(0.5, animations: { [unowned self] in self.tableView.editing = false } , completion: nil)
+        for cell in self.tableView.visibleCells {
+            if let timerCell = cell as? TimerTableViewCell {
+                UIView.animateWithDuration(0.5, animations: {timerCell.actionButton.alpha = 1}, completion: nil)
+            }
+        }
         
     }
     
