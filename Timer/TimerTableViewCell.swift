@@ -93,7 +93,8 @@ class TimerTableViewCell: UITableViewCell {
             timerLabel.textColor = UIColor.whiteColor()
             nameOfTimerLabel.textColor = UIColor.whiteColor()
         }
-    }
-    
+        
+        
+    }    
 
 }

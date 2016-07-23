@@ -129,6 +129,12 @@ class TimerTableViewController: UITableViewController {
         }    
     }
     */
+    
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        return .None
+    }
+    
+    
 
     
     // Override to support rearranging the table view.
@@ -253,7 +259,9 @@ class TimerTableViewController: UITableViewController {
     func doneEditingCells(sender: UIBarButtonItem) {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(TimerTableViewController.editCells(_:)))
         UIView.animateWithDuration(0.5, animations: { [unowned self] in self.tableView.editing = false } , completion: nil)
+        
     }
+    
 }
 
 extension String {
