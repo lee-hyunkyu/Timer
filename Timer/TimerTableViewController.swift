@@ -37,6 +37,12 @@ class TimerTableViewController: UITableViewController {
     
     // MARK: Storyboard
     
+    @IBOutlet weak var editCellsButton: UIBarButtonItem! {
+        didSet {
+            editCellsButton.target = self
+            editCellsButton.action = #selector(TimerTableViewController.editCells(_:))
+        }
+    }
     @IBAction func createNewTimer(sender: UIBarButtonItem) {
                 
     }
@@ -238,6 +244,15 @@ class TimerTableViewController: UITableViewController {
             }
             defaults.setObject(timerOrder, forKey: Cells.Order)
         }
+    }
+    func editCells(sender: UIBarButtonItem) {
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(TimerTableViewController.doneEditingCells(_:)))
+        UIView.animateWithDuration(0.5, animations: { [unowned self] in self.tableView.editing = true } , completion: nil)
+    }
+    
+    func doneEditingCells(sender: UIBarButtonItem) {
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(TimerTableViewController.editCells(_:)))
+        UIView.animateWithDuration(0.5, animations: { [unowned self] in self.tableView.editing = false } , completion: nil)
     }
 }
 

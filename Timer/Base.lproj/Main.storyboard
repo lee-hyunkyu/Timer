@@ -76,6 +76,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Rhd-O6-uXX">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="qtS-yT-faz"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="0JK-w3-29o">
                             <connections>
                                 <action selector="createNewTimer:" destination="z2E-Al-CGu" id="Hva-G7-b7O"/>
@@ -83,6 +84,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="editCellsButton" destination="qtS-yT-faz" id="SoQ-6r-3ig"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qX-It-m3L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
