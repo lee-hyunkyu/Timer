@@ -22,7 +22,11 @@ class TimerTableViewCell: UITableViewCell {
     var timer: Timer!
     var context: NSManagedObjectContext?
     weak var timeTracker: NSTimer?
-    private var showingTotal = true
+    private var showingTotal = true {
+        didSet {
+            updateUI()
+        }
+    }
     var currentSession: Session?
     
     @IBAction func changeTimerStatus(sender: UIButton) {
@@ -74,6 +78,20 @@ class TimerTableViewCell: UITableViewCell {
                 self.timerLabel.text = currentSession?.sessionValueAsString() ?? "00:00:00"
             }
         default: break
+        }
+    }
+    
+    private func updateUI() {
+        if showingTotal {
+            self.backgroundColor = UIColor.whiteColor()
+            actionButton.setTitleColor(nil, forState: .Normal)
+            timerLabel.textColor = UIColor.blackColor()
+            nameOfTimerLabel.textColor = UIColor.blackColor()
+        } else {
+            self.backgroundColor = UIColor.blackColor()
+            actionButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            timerLabel.textColor = UIColor.whiteColor()
+            nameOfTimerLabel.textColor = UIColor.whiteColor()
         }
     }
     
