@@ -98,6 +98,7 @@ class TimerTableViewController: UITableViewController {
             timerCell.nameOfTimerLabel?.text = timer?.name ?? "No Name"
             timerCell.timerLabel.text = timerCell.timer?.timerValueAsString() ?? "00:00:00"
             timerCell.context = self.context
+            timerCell.addGestureRecognizer(UITapGestureRecognizer(target: timerCell, action: #selector(TimerTableViewCell.showDifferentTimer(_:))))
         }
         return cell
     }

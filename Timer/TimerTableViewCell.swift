@@ -22,6 +22,8 @@ class TimerTableViewCell: UITableViewCell {
     var timer: Timer!
     var context: NSManagedObjectContext?
     weak var timeTracker: NSTimer?
+    private var showingTotal = true
+    var currentSession: Session?
     
     @IBAction func changeTimerStatus(sender: UIButton) {
         if actionButton.currentTitle == Names.StartTitle {
@@ -53,8 +55,27 @@ class TimerTableViewCell: UITableViewCell {
     }
     
     func fire(timer: NSTimer) {
-        print("Updating")
-        self.timerLabel.text = self.timer.timerValueAsString()
+        if showingTotal {
+            self.timerLabel.text = self.timer.timerValueAsString()
+        } else {
+            self.timerLabel.text = currentSession?.sessionValueAsString() ?? "00:00:00"
+        }
     }
+    
+    @objc
+    func showDifferentTimer(gesture: UITapGestureRecognizer) {
+        switch gesture.state {
+        case .Ended:
+            showingTotal = !showingTotal
+            if showingTotal {
+                self.timerLabel.text = self.timer.timerValueAsString()
+            } else {
+                currentSession = self.timer.currentSession()
+                self.timerLabel.text = currentSession?.sessionValueAsString() ?? "00:00:00"
+            }
+        default: break
+        }
+    }
+    
 
 }

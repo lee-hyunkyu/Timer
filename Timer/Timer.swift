@@ -88,6 +88,19 @@ class Timer: NSManagedObject {
         self.isActive = false
     }
     
+    func currentSession() -> Session? {
+        if isActive as! Bool {
+            for session in self.sessions?.allObjects as! [Session] {
+                if session.endTime == nil {
+                    return session
+                }
+            }
+        } else {
+            return nil
+        }
+        return nil
+    }
+    
     func timerValueAsString() -> String {
         let (hours, minutes, seconds) = self.currentValue()
         return "\(hours)".asTimeValue() + ":" + "\(minutes)".asTimeValue() + ":" + "\(seconds)".asTimeValue()

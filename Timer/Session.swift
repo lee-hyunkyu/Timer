@@ -65,6 +65,11 @@ class Session: NSManagedObject {
         
     }
     
+    func sessionValueAsString() -> String {
+        let (hours, minutes, seconds) = self.convertSessionValue()
+        return "\(hours)".asTimeValue() + ":" + "\(minutes)".asTimeValue() + ":" + "\(seconds)".asTimeValue()
+    }
+    
     struct Names {
         static let Entity = "Session"
     }
