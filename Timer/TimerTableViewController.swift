@@ -15,6 +15,7 @@ class TimerTableViewController: UITableViewController {
     
     var context: NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
     var projects = [Project]()
+    var timers = [Timer]()
     
     // MARK: Constants
     
@@ -36,6 +37,7 @@ class TimerTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateProjects()
+        updateTimers()
     }
 
     override func didReceiveMemoryWarning() {
@@ -178,6 +180,16 @@ class TimerTableViewController: UITableViewController {
             if let projectResults = (try? self.context!.executeFetchRequest(request)) as? [Project] {
                 self.projects = projectResults
             }
+        }
+    }
+    
+    func updateTimers() {
+        context?.performBlockAndWait { [unowned self] in
+            let request = NSFetchRequest(entityName: Timer.Names.Entity)
+            if let timerRequest = (try? self.context!.executeFetchRequest(request)) as? [Timer] {
+                self.timers = timerRequest
+            }
+            
         }
     }
 
