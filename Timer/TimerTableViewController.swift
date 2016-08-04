@@ -52,7 +52,7 @@ class TimerTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         updateProjects()
         updateTimers()
-        updateOrder()        
+        updateOrder()
     }
     
     override func viewDidLoad() {
@@ -113,6 +113,8 @@ class TimerTableViewController: UITableViewController {
         }
         return cell
     }
+    
+    
     
 
     /*

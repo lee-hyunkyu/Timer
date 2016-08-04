@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TimerTableViewCell: UITableViewCell {
+class TimerTableViewCell: BatchSelectionTableViewCell {
     
     struct Names {
         static let StartTitle = "Start"

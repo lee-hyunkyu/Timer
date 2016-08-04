@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		470BBFC71D45B4F200F90170 /* BatchSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470BBFC61D45B4F200F90170 /* BatchSelectionTableViewCell.swift */; };
 		471EB62A1D3D7A6F00A8B8C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471EB6291D3D7A6F00A8B8C7 /* AppDelegate.swift */; };
 		471EB62F1D3D7A6F00A8B8C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 471EB62D1D3D7A6F00A8B8C7 /* Main.storyboard */; };
 		471EB6321D3D7A6F00A8B8C7 /* Timer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 471EB6301D3D7A6F00A8B8C7 /* Timer.xcdatamodeld */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		470BBFC61D45B4F200F90170 /* BatchSelectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		471EB6261D3D7A6E00A8B8C7 /* Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		471EB6291D3D7A6F00A8B8C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		471EB62E1D3D7A6F00A8B8C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 			children = (
 				471EB63E1D3D83D600A8B8C7 /* TimerTableViewCell.swift */,
 				471EB6401D3D83DD00A8B8C7 /* TimerTableViewController.swift */,
+				470BBFC61D45B4F200F90170 /* BatchSelectionTableViewCell.swift */,
 				471EB6291D3D7A6F00A8B8C7 /* AppDelegate.swift */,
 				471EB62D1D3D7A6F00A8B8C7 /* Main.storyboard */,
 				472A1C991D3DC6C200B3EED2 /* NewTimer */,
@@ -190,6 +193,7 @@
 				471EB6321D3D7A6F00A8B8C7 /* Timer.xcdatamodeld in Sources */,
 				471EB6411D3D83DD00A8B8C7 /* TimerTableViewController.swift in Sources */,
 				478976E11D3EDC2C005B3BE4 /* AddNewProjectTableViewCell.swift in Sources */,
+				470BBFC71D45B4F200F90170 /* BatchSelectionTableViewCell.swift in Sources */,
 				472A1C9B1D3DD72500B3EED2 /* NewTimerTableViewCell.swift in Sources */,
 				472A1C981D3DC6BC00B3EED2 /* NewTimerTableViewController.swift in Sources */,
 				471EB62A1D3D7A6F00A8B8C7 /* AppDelegate.swift in Sources */,
